@@ -1,4 +1,4 @@
-package gp.schedule.system;
+
 
 abstract class Person {
     private String name;
