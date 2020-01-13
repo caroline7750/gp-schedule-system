@@ -1,19 +1,25 @@
+import com.opencsv.CSVReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
 public class Teacher extends Person{
     
     private int capacity;
-    private int t_ID;
     private PersonLinkedList visiStudents;
     private final int studentCount = visiStudents.getSize();
     private PersonLinkedList assignStudents;
     
-    private Teacher(int t_ID, int capacity)
+    private Teacher(String name, int t_ID, int capacity)
     {
-        this.t_ID = t_ID;
+        super(name, t_ID);
         this.capacity = capacity;
     }
     
     private Teacher()
     {
+        super();
         capacity = 10;
     }
 
@@ -27,11 +33,6 @@ public class Teacher extends Person{
         this.capacity = capacity;
     }
     
-    public int getStudentCount() 
-    {
-        return studentCount;
-    }
-
     public PersonLinkedList getVisiStudents() {
         return visiStudents;
     }
@@ -40,20 +41,17 @@ public class Teacher extends Person{
         this.visiStudents = visiStudents;
     }
 
+    public int getStudentCount() 
+    {
+        return studentCount;
+    }
+
     public PersonLinkedList getAssignStudents() {
         return assignStudents;
     }
 
     public void setAssignStudents(PersonLinkedList assignStudents) {
         this.assignStudents = assignStudents;
-    }
-
-    public int getT_ID() {
-        return t_ID;
-    }
-
-    public void setT_ID(int t_ID) {
-        this.t_ID = t_ID;
     }
     
     public void add_student(Student s)
@@ -77,15 +75,14 @@ public class Teacher extends Person{
     
     public void verify_student(Student s)
     {
-        if (s.getVisiTeacher().getID() == t_ID)
+        if (s.getVisiTeacher().getID() == this.getID())
         {
             s.setVerified(true);
         }
     }
     
-    public void import_students()
+    public void import_students(String file_name, PersonLinkedList assignStudents)
     {
-        //use CSV import func & file reader
+        //call CSVLineByLine
     }
-
 }

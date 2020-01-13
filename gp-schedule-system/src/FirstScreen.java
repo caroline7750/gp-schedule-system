@@ -5,7 +5,6 @@
  */
 
 /**
- *
  * @author 960148
  */
 public class FirstScreen extends javax.swing.JFrame {
@@ -15,6 +14,12 @@ public class FirstScreen extends javax.swing.JFrame {
      */
     public FirstScreen() {
         initComponents();
+        studentPanel.setVisible(false);
+        teacherPanel.setVisible(false);
+        studentMenu.setVisible(false);
+        teacherMenu.setVisible(false);
+        SeeVisitingGPStudents.setVisible(false);
+        //panels' visibility
     }
 
     /**
@@ -26,53 +31,535 @@ public class FirstScreen extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jLabel2 = new javax.swing.JLabel();
+        FirstScreenStudent = new javax.swing.JFrame();
+        StudentFirstScreen = new javax.swing.JFrame();
+        jLabel5 = new javax.swing.JLabel();
+        firstPanel = new javax.swing.JPanel();
+        TeacherButton = new javax.swing.JButton();
+        StudentButton = new javax.swing.JButton();
+        title = new javax.swing.JLabel();
+        selectText = new javax.swing.JLabel();
+        studentPanel = new javax.swing.JPanel();
+        ProgramTitle = new javax.swing.JLabel();
+        SelectStudent = new javax.swing.JComboBox<>();
+        SelectText = new javax.swing.JLabel();
+        studentMenu = new javax.swing.JPanel();
+        prog_title = new javax.swing.JLabel();
+        guidingtxt = new javax.swing.JLabel();
+        teacher_options = new javax.swing.JComboBox<>();
+        chooseTeacherTxt = new javax.swing.JLabel();
+        why_teacher_txt = new javax.swing.JTextField();
+        explainMovingTxt = new javax.swing.JLabel();
+        teacherPanel = new javax.swing.JPanel();
+        SelectYourself = new javax.swing.JComboBox<>();
+        progTitle = new javax.swing.JLabel();
+        selectTxt = new javax.swing.JLabel();
+        teacherMenu = new javax.swing.JPanel();
+        prog_title_txt = new javax.swing.JLabel();
+        seeVisibleGP = new javax.swing.JButton();
+        manageAssignedGP = new javax.swing.JButton();
+        SeeVisitingGPStudents = new javax.swing.JPanel();
+        program_txt_title = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jList1 = new javax.swing.JList<>();
         jLabel1 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jList2 = new javax.swing.JList<>();
+        jLabel4 = new javax.swing.JLabel();
+        jCheckBox2 = new javax.swing.JCheckBox();
+        jCheckBox3 = new javax.swing.JCheckBox();
+        jCheckBox1 = new javax.swing.JCheckBox();
+        jCheckBox4 = new javax.swing.JCheckBox();
+        jCheckBox5 = new javax.swing.JCheckBox();
+        enter_capacity = new javax.swing.JTextField();
+        set_capacity_txt = new javax.swing.JLabel();
+
+        javax.swing.GroupLayout FirstScreenStudentLayout = new javax.swing.GroupLayout(FirstScreenStudent.getContentPane());
+        FirstScreenStudent.getContentPane().setLayout(FirstScreenStudentLayout);
+        FirstScreenStudentLayout.setHorizontalGroup(
+            FirstScreenStudentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 400, Short.MAX_VALUE)
+        );
+        FirstScreenStudentLayout.setVerticalGroup(
+            FirstScreenStudentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 300, Short.MAX_VALUE)
+        );
+
+        javax.swing.GroupLayout StudentFirstScreenLayout = new javax.swing.GroupLayout(StudentFirstScreen.getContentPane());
+        StudentFirstScreen.getContentPane().setLayout(StudentFirstScreenLayout);
+        StudentFirstScreenLayout.setHorizontalGroup(
+            StudentFirstScreenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 400, Short.MAX_VALUE)
+        );
+        StudentFirstScreenLayout.setVerticalGroup(
+            StudentFirstScreenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 300, Short.MAX_VALUE)
+        );
+
+        jLabel5.setText("Select Yourself:");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jButton1.setText("Teacher");
+        TeacherButton.setText("Teacher");
+        TeacherButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                TeacherButtonActionPerformed(evt);
+            }
+        });
 
-        jButton2.setText("Student");
+        StudentButton.setText("Student");
+        StudentButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                StudentButtonActionPerformed(evt);
+            }
+        });
 
-        jLabel2.setText("GP Schedule System");
+        title.setText("GP Schedule System");
 
-        jLabel1.setText("Select your user type:");
+        selectText.setText("Select Yourself:");
+
+        javax.swing.GroupLayout firstPanelLayout = new javax.swing.GroupLayout(firstPanel);
+        firstPanel.setLayout(firstPanelLayout);
+        firstPanelLayout.setHorizontalGroup(
+            firstPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(firstPanelLayout.createSequentialGroup()
+                .addGap(24, 24, 24)
+                .addComponent(selectText)
+                .addContainerGap(26, Short.MAX_VALUE))
+            .addGroup(firstPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(firstPanelLayout.createSequentialGroup()
+                    .addContainerGap()
+                    .addGroup(firstPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(title)
+                        .addGroup(firstPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(TeacherButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(StudentButton, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+        );
+        firstPanelLayout.setVerticalGroup(
+            firstPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(firstPanelLayout.createSequentialGroup()
+                .addGap(63, 63, 63)
+                .addComponent(selectText)
+                .addContainerGap(142, Short.MAX_VALUE))
+            .addGroup(firstPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(firstPanelLayout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(title, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(64, 64, 64)
+                    .addComponent(StudentButton, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(TeacherButton, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+        );
+
+        ProgramTitle.setText("GP Schedule System - Student Home Screen");
+
+        SelectStudent.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Student 1", "Student 2", "Student 3", "Student 4", "Student 5", "Student 6", "Student 7", "Student 8", "Student 9", "Student 10" }));
+        SelectStudent.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SelectStudentActionPerformed(evt);
+            }
+        });
+
+        SelectText.setText("Select Yourself:");
+
+        javax.swing.GroupLayout studentPanelLayout = new javax.swing.GroupLayout(studentPanel);
+        studentPanel.setLayout(studentPanelLayout);
+        studentPanelLayout.setHorizontalGroup(
+            studentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, studentPanelLayout.createSequentialGroup()
+                .addContainerGap(66, Short.MAX_VALUE)
+                .addComponent(ProgramTitle)
+                .addGap(59, 59, 59))
+            .addGroup(studentPanelLayout.createSequentialGroup()
+                .addGap(133, 133, 133)
+                .addComponent(SelectText)
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(studentPanelLayout.createSequentialGroup()
+                .addGap(121, 121, 121)
+                .addComponent(SelectStudent, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        studentPanelLayout.setVerticalGroup(
+            studentPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(studentPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(ProgramTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(SelectText)
+                .addGap(18, 18, 18)
+                .addComponent(SelectStudent, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(191, Short.MAX_VALUE))
+        );
+
+        prog_title.setText("GP Schedule System");
+
+        guidingtxt.setText("If moving GPs:");
+
+        teacher_options.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "No Teacher", "Teacher 1", "Teacher 2", "Teacher 3", "Teacher 4" }));
+
+        chooseTeacherTxt.setText("Choose the GP teacher");
+
+        why_teacher_txt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                why_teacher_txtActionPerformed(evt);
+            }
+        });
+
+        explainMovingTxt.setText("Tell the teacher why you are coming");
+
+        javax.swing.GroupLayout studentMenuLayout = new javax.swing.GroupLayout(studentMenu);
+        studentMenu.setLayout(studentMenuLayout);
+        studentMenuLayout.setHorizontalGroup(
+            studentMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(studentMenuLayout.createSequentialGroup()
+                .addGroup(studentMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(studentMenuLayout.createSequentialGroup()
+                        .addGap(138, 138, 138)
+                        .addComponent(prog_title))
+                    .addGroup(studentMenuLayout.createSequentialGroup()
+                        .addGap(76, 76, 76)
+                        .addComponent(guidingtxt))
+                    .addGroup(studentMenuLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(studentMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(studentMenuLayout.createSequentialGroup()
+                                .addGap(6, 6, 6)
+                                .addComponent(why_teacher_txt))
+                            .addComponent(teacher_options, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(studentMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(explainMovingTxt)
+                            .addComponent(chooseTeacherTxt))))
+                .addGap(44, 44, 44))
+        );
+        studentMenuLayout.setVerticalGroup(
+            studentMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(studentMenuLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(prog_title, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(guidingtxt)
+                .addGap(41, 41, 41)
+                .addGroup(studentMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(teacher_options, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(chooseTeacherTxt))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(studentMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(why_teacher_txt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(explainMovingTxt))
+                .addContainerGap(142, Short.MAX_VALUE))
+        );
+
+        SelectYourself.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Teacher 1", "Teacher 2", "Teacher 3", "Teacher 4", "Teacher 5" }));
+        SelectYourself.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SelectYourselfActionPerformed(evt);
+            }
+        });
+
+        progTitle.setText("GP Schedule System - Teacher Home Screen");
+
+        selectTxt.setText("Select Yourself:");
+
+        javax.swing.GroupLayout teacherPanelLayout = new javax.swing.GroupLayout(teacherPanel);
+        teacherPanel.setLayout(teacherPanelLayout);
+        teacherPanelLayout.setHorizontalGroup(
+            teacherPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, teacherPanelLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(SelectYourself, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(82, 82, 82))
+            .addGroup(teacherPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(progTitle)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(teacherPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(teacherPanelLayout.createSequentialGroup()
+                    .addGap(95, 95, 95)
+                    .addComponent(selectTxt)
+                    .addContainerGap(96, Short.MAX_VALUE)))
+        );
+        teacherPanelLayout.setVerticalGroup(
+            teacherPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, teacherPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(progTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
+                .addComponent(SelectYourself, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+            .addGroup(teacherPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(teacherPanelLayout.createSequentialGroup()
+                    .addGap(42, 42, 42)
+                    .addComponent(selectTxt)
+                    .addContainerGap(42, Short.MAX_VALUE)))
+        );
+
+        prog_title_txt.setText("GP Schedule System");
+
+        seeVisibleGP.setText("Manage Coming to GP");
+        seeVisibleGP.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                seeVisibleGPActionPerformed(evt);
+            }
+        });
+
+        manageAssignedGP.setText("Manage Assigned GP Students");
+
+        javax.swing.GroupLayout teacherMenuLayout = new javax.swing.GroupLayout(teacherMenu);
+        teacherMenu.setLayout(teacherMenuLayout);
+        teacherMenuLayout.setHorizontalGroup(
+            teacherMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(teacherMenuLayout.createSequentialGroup()
+                .addGap(133, 133, 133)
+                .addComponent(prog_title_txt)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, teacherMenuLayout.createSequentialGroup()
+                .addContainerGap(87, Short.MAX_VALUE)
+                .addGroup(teacherMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(seeVisibleGP, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(manageAssignedGP, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(80, 80, 80))
+        );
+        teacherMenuLayout.setVerticalGroup(
+            teacherMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(teacherMenuLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(prog_title_txt, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(27, 27, 27)
+                .addComponent(manageAssignedGP, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(seeVisibleGP, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(117, Short.MAX_VALUE))
+        );
+
+        program_txt_title.setText("GP Schedule System");
+
+        jList1.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = { "VStudent1", "VStudent 2", "VStudent 3", "VStudent 4" };
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
+        });
+        jScrollPane1.setViewportView(jList1);
+
+        jLabel1.setText("List of Reasons");
+
+        jLabel3.setText("List of Visiting Students");
+
+        jList2.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = { "Reason 1", "Reason 2", "Reason 3", "Reason 4" };
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
+        });
+        jScrollPane2.setViewportView(jList2);
+
+        jLabel4.setText("Verify Presence");
+
+        jCheckBox2.setText("VStudent2");
+
+        jCheckBox3.setText("VStudent1");
+
+        jCheckBox1.setText("VStudent3");
+
+        jCheckBox4.setText("VStudent4");
+
+        jCheckBox5.setText("VStudent5");
+
+        enter_capacity.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                enter_capacityActionPerformed(evt);
+            }
+        });
+
+        set_capacity_txt.setText("Set Max Number of Visiting Students");
+
+        javax.swing.GroupLayout SeeVisitingGPStudentsLayout = new javax.swing.GroupLayout(SeeVisitingGPStudents);
+        SeeVisitingGPStudents.setLayout(SeeVisitingGPStudentsLayout);
+        SeeVisitingGPStudentsLayout.setHorizontalGroup(
+            SeeVisitingGPStudentsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, SeeVisitingGPStudentsLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel1)
+                .addGap(44, 44, 44)
+                .addComponent(jLabel4)
+                .addGap(15, 15, 15))
+            .addGroup(SeeVisitingGPStudentsLayout.createSequentialGroup()
+                .addGroup(SeeVisitingGPStudentsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(SeeVisitingGPStudentsLayout.createSequentialGroup()
+                        .addGap(122, 122, 122)
+                        .addComponent(program_txt_title))
+                    .addGroup(SeeVisitingGPStudentsLayout.createSequentialGroup()
+                        .addGroup(SeeVisitingGPStudentsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(SeeVisitingGPStudentsLayout.createSequentialGroup()
+                                .addGap(30, 30, 30)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(76, 76, 76)
+                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(77, 77, 77))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, SeeVisitingGPStudentsLayout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(set_capacity_txt)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                        .addGroup(SeeVisitingGPStudentsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(enter_capacity, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(SeeVisitingGPStudentsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(jCheckBox3)
+                                .addComponent(jCheckBox2)
+                                .addComponent(jCheckBox1)
+                                .addComponent(jCheckBox4)
+                                .addComponent(jCheckBox5)))))
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+        SeeVisitingGPStudentsLayout.setVerticalGroup(
+            SeeVisitingGPStudentsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(SeeVisitingGPStudentsLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(program_txt_title, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(SeeVisitingGPStudentsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel4))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(SeeVisitingGPStudentsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(SeeVisitingGPStudentsLayout.createSequentialGroup()
+                        .addComponent(jCheckBox3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jCheckBox2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jCheckBox1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jCheckBox4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jCheckBox5)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
+                .addGroup(SeeVisitingGPStudentsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(enter_capacity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(set_capacity_txt))
+                .addGap(15, 15, 15))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(131, 131, 131)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(jLabel2)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 126, Short.MAX_VALUE)
-                            .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addComponent(jLabel1))
-                .addContainerGap(134, Short.MAX_VALUE))
+                .addGap(13, 13, 13)
+                .addComponent(firstPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(250, Short.MAX_VALUE))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(studentPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(teacherPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(studentMenu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(teacherMenu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(SeeVisitingGPStudents, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(36, 36, 36)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(85, Short.MAX_VALUE))
+                .addComponent(firstPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(73, Short.MAX_VALUE))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(studentPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(teacherPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(studentMenu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(teacherMenu, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(SeeVisitingGPStudents, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void StudentButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_StudentButtonActionPerformed
+        firstPanel.setVisible(false);
+        studentPanel.setVisible(true);
+    }//GEN-LAST:event_StudentButtonActionPerformed
+
+    private void TeacherButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TeacherButtonActionPerformed
+        firstPanel.setVisible(false);
+        teacherPanel.setVisible(true);
+    }//GEN-LAST:event_TeacherButtonActionPerformed
+
+    private void SelectYourselfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SelectYourselfActionPerformed
+        teacherPanel.setVisible(false);
+        teacherMenu.setVisible(true);
+        // TODO add your handling code here:
+    }//GEN-LAST:event_SelectYourselfActionPerformed
+
+    private void SelectStudentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SelectStudentActionPerformed
+        //System.out.println(SelectStudent.getSelectedItem());
+        studentPanel.setVisible(false);
+        //need to test if student able to move (or if GP frozen)
+        studentMenu.setVisible(true);
+        // TODO add your handling code here:
+    }//GEN-LAST:event_SelectStudentActionPerformed
+
+    private void why_teacher_txtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_why_teacher_txtActionPerformed
+
+        String text = why_teacher_txt.getText();
+        String teacher_chosen = (String)teacher_options.getSelectedItem();
+        //System.out.println(text);
+        //System.out.println(teacher_chosen);
+    }//GEN-LAST:event_why_teacher_txtActionPerformed
+
+    private void enter_capacityActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enter_capacityActionPerformed
+        
+        int capacity = Integer.parseInt(enter_capacity.getText());
+        System.out.println(capacity);
+        // TODO add your handling code here:
+    }//GEN-LAST:event_enter_capacityActionPerformed
+
+    private void seeVisibleGPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_seeVisibleGPActionPerformed
+        teacherMenu.setVisible(false);
+        SeeVisitingGPStudents.setVisible(true);
+        // TODO add your handling code here:
+    }//GEN-LAST:event_seeVisibleGPActionPerformed
+                                        
     /**
      * @param args the command line arguments
      */
@@ -107,11 +594,49 @@ public class FirstScreen extends javax.swing.JFrame {
             }
         });
     }
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JFrame FirstScreenStudent;
+    private javax.swing.JLabel ProgramTitle;
+    private javax.swing.JPanel SeeVisitingGPStudents;
+    private javax.swing.JComboBox<String> SelectStudent;
+    private javax.swing.JLabel SelectText;
+    private javax.swing.JComboBox<String> SelectYourself;
+    private javax.swing.JButton StudentButton;
+    private javax.swing.JFrame StudentFirstScreen;
+    private javax.swing.JButton TeacherButton;
+    private javax.swing.JLabel chooseTeacherTxt;
+    private javax.swing.JTextField enter_capacity;
+    private javax.swing.JLabel explainMovingTxt;
+    private javax.swing.JPanel firstPanel;
+    private javax.swing.JLabel guidingtxt;
+    private javax.swing.JCheckBox jCheckBox1;
+    private javax.swing.JCheckBox jCheckBox2;
+    private javax.swing.JCheckBox jCheckBox3;
+    private javax.swing.JCheckBox jCheckBox4;
+    private javax.swing.JCheckBox jCheckBox5;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JList<String> jList1;
+    private javax.swing.JList<String> jList2;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JButton manageAssignedGP;
+    private javax.swing.JLabel progTitle;
+    private javax.swing.JLabel prog_title;
+    private javax.swing.JLabel prog_title_txt;
+    private javax.swing.JLabel program_txt_title;
+    private javax.swing.JButton seeVisibleGP;
+    private javax.swing.JLabel selectText;
+    private javax.swing.JLabel selectTxt;
+    private javax.swing.JLabel set_capacity_txt;
+    private javax.swing.JPanel studentMenu;
+    private javax.swing.JPanel studentPanel;
+    private javax.swing.JPanel teacherMenu;
+    private javax.swing.JPanel teacherPanel;
+    private javax.swing.JComboBox<String> teacher_options;
+    private javax.swing.JLabel title;
+    private javax.swing.JTextField why_teacher_txt;
     // End of variables declaration//GEN-END:variables
 }

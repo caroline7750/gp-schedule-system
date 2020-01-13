@@ -1,19 +1,19 @@
 public class Student extends Person {
     
     private String why_teacher;
-    private int s_ID;
     private Teacher assignTeacher;
     private Teacher visiTeacher = null;
     private boolean verified = false;
 
-    private Student(int s_ID, Teacher teacher_assign)
+    public Student(String name, int ID, Teacher teacher_assign)
     {
-        this.s_ID = s_ID;
+        super(name, ID);
         this.assignTeacher = teacher_assign;
     }
     
-    private Student()
+    public Student()
     {
+        super();
     }
 
     public void setWhy_teacher(String why_teacher) 
@@ -36,14 +36,6 @@ public class Student extends Person {
         assignTeacher = t;
     }
     
-    public int getS_ID() {
-        return s_ID;
-    }
-
-    public void setS_ID(int s_ID) {
-        this.s_ID = s_ID;
-    }
-
     public Teacher getVisiTeacher() {
         return visiTeacher;
     }

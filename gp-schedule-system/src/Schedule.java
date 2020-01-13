@@ -17,7 +17,7 @@ public class Schedule {
             Student s = (Student) students.get(i);
             if (s.getVisiTeacher() != null)
             {
-                return s.getVisiTeacher().getT_ID();
+                return s.getVisiTeacher().getID();
             }
         }
         return -1; 
@@ -38,7 +38,7 @@ public class Schedule {
         for (int i = 0; i<teachers.getSize(); i++)
         {
             Teacher t = (Teacher) teachers.get(i);
-            l += t.getName() + t.getT_ID();
+            l += t.getName() + t.getID();
         }
         return l;
     }
@@ -49,14 +49,14 @@ public class Schedule {
         for (int i = 0; i<teachers.getSize(); i++)
         {
             Teacher t = (Teacher) teachers.get(i);
-            l += t.getName() + t.getT_ID();
+            l += t.getName() + t.getID();
             l += "Students: ";
             for (int j = 0; j<t.getAssignStudents().getSize(); j++)
             {
                 Student s = (Student) students.get(j);
-                l += s.getName() + s.getS_ID();
+                l += s.getName() + s.getID();
             }
-            l = t.getName() + t.getT_ID();
+            l = t.getName() + t.getID();
         }
         return l;
     }

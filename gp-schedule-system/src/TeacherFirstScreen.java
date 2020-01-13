@@ -30,6 +30,7 @@ public class TeacherFirstScreen extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jComboBox2 = new javax.swing.JComboBox<>();
         jLabel4 = new javax.swing.JLabel();
+        TeacherFirstScreen = new javax.swing.JFrame();
         jLabel1 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jComboBox1 = new javax.swing.JComboBox<>();
@@ -41,6 +42,17 @@ public class TeacherFirstScreen extends javax.swing.JFrame {
         jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Student 1", "Student 2", "Student 3", "Student 4", "Student 5", "Student 6", "Student 7", "Student 8", "Student 9", "Student 10" }));
 
         jLabel4.setText("Select yourself:");
+
+        javax.swing.GroupLayout TeacherFirstScreenLayout = new javax.swing.GroupLayout(TeacherFirstScreen.getContentPane());
+        TeacherFirstScreen.getContentPane().setLayout(TeacherFirstScreenLayout);
+        TeacherFirstScreenLayout.setHorizontalGroup(
+            TeacherFirstScreenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 400, Short.MAX_VALUE)
+        );
+        TeacherFirstScreenLayout.setVerticalGroup(
+            TeacherFirstScreenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 300, Short.MAX_VALUE)
+        );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -128,6 +140,7 @@ public class TeacherFirstScreen extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JFrame TeacherFirstScreen;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JLabel jLabel1;
