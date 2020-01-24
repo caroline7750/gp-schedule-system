@@ -4,12 +4,16 @@ public class Student extends Person {
     private Teacher assignTeacher;
     private Teacher visiTeacher = null;
     private boolean verified = false;
+    private int assignTeachID;
 
-    public Student(String name, int ID, Teacher teacher_assign)
+    public Student(int ID, String name, int assignTeachID)
     {
         super(name, ID);
-        this.assignTeacher = teacher_assign;
+        this.assignTeachID = assignTeachID;
+        //need to search for ID and assign it to teacher
+        //pre-check that ID existing (do this in file processing)
     }
+    
     
     public Student()
     {

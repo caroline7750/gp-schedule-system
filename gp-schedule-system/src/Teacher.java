@@ -8,16 +8,16 @@ public class Teacher extends Person{
     
     private int capacity;
     private PersonLinkedList visiStudents;
-    private final int studentCount = visiStudents.getSize();
+    //private final int studentCount = visiStudents.getSize(); BROKEN
     private PersonLinkedList assignStudents;
     
-    private Teacher(String name, int t_ID, int capacity)
+    public Teacher(String name, int t_ID)
     {
         super(name, t_ID);
-        this.capacity = capacity;
+        capacity = 10; //default capacity
     }
     
-    private Teacher()
+    public Teacher()
     {
         super();
         capacity = 10;
@@ -41,10 +41,10 @@ public class Teacher extends Person{
         this.visiStudents = visiStudents;
     }
 
-    public int getStudentCount() 
-    {
-        return studentCount;
-    }
+//    public int getStudentCount() 
+//    {
+//        return studentCount;
+//    }
 
     public PersonLinkedList getAssignStudents() {
         return assignStudents;

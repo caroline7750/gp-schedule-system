@@ -1,16 +1,50 @@
+import java.util.ArrayList;
+
 public class Schedule {
     
     PersonLinkedList teachers; //contains teachers' IDs
     PersonLinkedList students; //contains students' IDs
-    
+     
     public Schedule(PersonLinkedList teachers, PersonLinkedList students)
     {
         this.teachers = teachers;
         this.students = students;
     }
     
+    public Schedule()
+    {
+        
+    }
+    
+    public String[] getStudentsForCombo()
+    {
+        String[] studentIDs = new String[students.getSize()];
+        for (int i = 0; i < students.getSize(); i++)
+        {
+            studentIDs[i] = students.get(i).getID() + "";
+        }   
+        return studentIDs;
+    }
+    
+    //setters and getters
+    
+    public PersonLinkedList getTeachers() {
+        return teachers;
+    }
+
+    public void setTeachers(PersonLinkedList teachers) {
+        this.teachers = teachers;
+    }
+
+    public PersonLinkedList getStudents() {
+        return students;
+    }
+
+    public void setStudents(PersonLinkedList students) {
+        this.students = students;
+    }
     public int find_student(int studentID)
-            //return teacher ID of student's location
+    //return teacher ID of student's location
     {
         for (int i = 0; i<students.getSize(); i++)
         {
@@ -18,6 +52,10 @@ public class Schedule {
             if (s.getVisiTeacher() != null)
             {
                 return s.getVisiTeacher().getID();
+            }
+            else
+            {
+                return s.get_teacher().getID();
             }
         }
         return -1; 
@@ -32,7 +70,7 @@ public class Schedule {
         }
     }
     
-    private String get_teacher_list()
+    public String get_teacher_list()
     {
         String l = "";
         for (int i = 0; i<teachers.getSize(); i++)
@@ -43,7 +81,7 @@ public class Schedule {
         return l;
     }
     
-    private String get_master_list()
+    public String print_master_list()
     {
         String l = "";
         for (int i = 0; i<teachers.getSize(); i++)
@@ -60,8 +98,8 @@ public class Schedule {
         }
         return l;
     }
-    
-    private void move_student(Student s, Teacher t)
+        
+    public void move_student(Student s, Teacher t)
     {
         s.set_teacher(t);
     }
