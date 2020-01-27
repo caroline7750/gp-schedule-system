@@ -16,16 +16,57 @@ public class Schedule {
         
     }
     
-    public String[] getStudentsForCombo()
+    public Teacher getTeacherFromID(int ID)
     {
-        String[] studentIDs = new String[students.getSize()];
-        for (int i = 0; i < students.getSize(); i++)
+        for (int i = 0; i < teachers.size(); i++)
         {
-            studentIDs[i] = students.get(i).getID() + "";
-        }   
-        return studentIDs;
+            if (ID == teachers.get(i).getID())
+            {
+                return (Teacher) teachers.get(i);
+            }
+        }
+        return null;
     }
     
+    public Student getStudentFromID(int ID)
+    {
+        for (int i = 0; i < students.size(); i++)
+        {
+            if (ID == students.get(i).getID())
+            {
+                return (Student) students.get(i);
+            }
+        }
+        return null;
+    }
+    
+    public String[] getStudentsForCombo()
+    {
+        String[] stu = new String[students.getSize()];
+        for (int i = 0; i < students.getSize(); i++)
+        {
+            stu[i] = students.get(i).getID() + ": " + students.get(i).getName();
+        }   
+        return stu;
+    }
+    
+    public String[] getTeachersForCombo()
+    {
+        String[] teach = new String[teachers.getSize()];
+        for (int i = 0; i < teachers.getSize(); i++)
+        {
+            teach[i] = teachers.get(i).getID() + ": " + teachers.get(i).getName();
+        }   
+        return teach;
+    }
+        
+//    public PersonLinkedList getStudentsForVList(int tID)
+//    {
+//        PersonLinkedList vstudents;
+//        
+//    }
+     
+
     //setters and getters
     
     public PersonLinkedList getTeachers() {

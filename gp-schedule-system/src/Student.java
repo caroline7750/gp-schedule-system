@@ -2,7 +2,7 @@ public class Student extends Person {
     
     private String why_teacher;
     private Teacher assignTeacher;
-    private Teacher visiTeacher = null;
+    private Teacher visiTeacher;
     private boolean verified = false;
     private int assignTeachID;
 
@@ -10,6 +10,7 @@ public class Student extends Person {
     {
         super(name, ID);
         this.assignTeachID = assignTeachID;
+        
         //need to search for ID and assign it to teacher
         //pre-check that ID existing (do this in file processing)
     }
@@ -56,15 +57,15 @@ public class Student extends Person {
         this.verified = verified;
     }
     
-    public void select_teacher(Teacher t)
-    {
-        if(visiTeacher==null && t.getStudentCount() < t.getCapacity())
-        {
-            visiTeacher = t;
-            t.add_student(this);
-            //GUI - prompt to answer why visiting that teacher
-        }
-    }
+//    public void select_teacher(Teacher t)
+//    {
+//        if(visiTeacher==null && t.getStudentCount() < t.getCapacity()) //FIX
+//        {
+//            visiTeacher = t;
+//            t.add_student(this);
+//            //GUI - prompt to answer why visiting that teacher
+//        }
+//    }
     
     public void deselect_teacher(Teacher t)
     {
@@ -74,5 +75,21 @@ public class Student extends Person {
             why_teacher = null;
             t.remove_student(this);
         }
+    }
+
+    public Teacher getAssignTeacher() {
+        return assignTeacher;
+    }
+
+    public void setAssignTeacher(Teacher assignTeacher) {
+        this.assignTeacher = assignTeacher;
+    }
+
+    public int getAssignTeachID() {
+        return assignTeachID;
+    }
+
+    public void setAssignTeachID(int assignTeachID) {
+        this.assignTeachID = assignTeachID;
     }
 }
