@@ -24,6 +24,7 @@ public class FirstScreen extends javax.swing.JFrame {
         capacityFullNotice.setVisible(false);
         successSelectNotice.setVisible(false);
         capacityTooLargeLabel.setVisible(false);
+        deselectionNotice.setVisible(false);
         //panels' visibility
     }
 
@@ -71,6 +72,7 @@ public class FirstScreen extends javax.swing.JFrame {
         guidingtxt1 = new javax.swing.JLabel();
         successSelectNotice = new javax.swing.JLabel();
         GoHomeScreenStudent = new javax.swing.JButton();
+        deselectionNotice = new javax.swing.JLabel();
         teacherPanel = new javax.swing.JPanel();
         SelectTeacher = new javax.swing.JComboBox<>();
         progTitle = new javax.swing.JLabel();
@@ -341,6 +343,8 @@ public class FirstScreen extends javax.swing.JFrame {
             }
         });
 
+        deselectionNotice.setText("You have deselected that teacher and are not moving during GP ");
+
         javax.swing.GroupLayout studentMenuLayout = new javax.swing.GroupLayout(studentMenu);
         studentMenu.setLayout(studentMenuLayout);
         studentMenuLayout.setHorizontalGroup(
@@ -357,26 +361,31 @@ public class FirstScreen extends javax.swing.JFrame {
                                 .addGap(6, 6, 6)
                                 .addComponent(why_teacher_txt))
                             .addComponent(teacher_options, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 59, Short.MAX_VALUE)
                         .addGroup(studentMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(explainMovingTxt)
                             .addComponent(chooseTeacherTxt))))
                 .addGap(44, 44, 44))
-            .addGroup(studentMenuLayout.createSequentialGroup()
-                .addGap(78, 78, 78)
-                .addGroup(studentMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(guidingtxt1)
-                    .addComponent(capacityFullNotice))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, studentMenuLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(GoHomeScreenStudent)
                 .addGap(14, 14, 14))
+            .addGroup(studentMenuLayout.createSequentialGroup()
+                .addGroup(studentMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(studentMenuLayout.createSequentialGroup()
+                        .addGap(78, 78, 78)
+                        .addGroup(studentMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(guidingtxt1)
+                            .addComponent(capacityFullNotice)))
+                    .addGroup(studentMenuLayout.createSequentialGroup()
+                        .addGap(25, 25, 25)
+                        .addComponent(deselectionNotice)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(studentMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(studentMenuLayout.createSequentialGroup()
                     .addGap(79, 79, 79)
                     .addComponent(successSelectNotice)
-                    .addContainerGap(139, Short.MAX_VALUE)))
+                    .addContainerGap(180, Short.MAX_VALUE)))
         );
         studentMenuLayout.setVerticalGroup(
             studentMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -395,7 +404,9 @@ public class FirstScreen extends javax.swing.JFrame {
                     .addComponent(explainMovingTxt))
                 .addGap(44, 44, 44)
                 .addComponent(capacityFullNotice)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 51, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(deselectionNotice)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
                 .addComponent(GoHomeScreenStudent)
                 .addGap(14, 14, 14))
             .addGroup(studentMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1084,6 +1095,7 @@ public class FirstScreen extends javax.swing.JFrame {
 
     private void SelectStudentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SelectStudentActionPerformed
         capacityFullNotice.setVisible(false);
+        deselectionNotice.setVisible(false);
         studentPanel.setVisible(false);
         //need to test if student able to move (or if GP frozen)
         studentMenu.setVisible(true);
@@ -1368,6 +1380,7 @@ public class FirstScreen extends javax.swing.JFrame {
         {
             String selectedStr = "" + teacher_options.getSelectedItem();
             String idParse = selectedStr.substring(0,selectedStr.indexOf(":"));
+            System.out.println(selectedStr);
             int visiTeacherID = Integer.parseInt(idParse);
             Teacher tSel = s.getTeacherFromID(visiTeacherID);
             if (tSel.add_student((Student) user))
@@ -1381,13 +1394,18 @@ public class FirstScreen extends javax.swing.JFrame {
                 successSelectNotice.setVisible(false);
             }
         }
-        catch(NumberFormatException e)
-        {
-            //catches if "no teacher" option selected
-        }
         catch(StringIndexOutOfBoundsException e)
         {
-            //catches b/c no ":" in "no teacher" option
+            if (((Student)user).getVisiTeacher() != null)
+            {
+                ((Student)user).getVisiTeacher().remove_student((Student)user);
+                ((Student)user).deselect_teacher();   
+                successSelectNotice.setVisible(false);
+                deselectionNotice.setVisible(true);
+                
+                //update for assigned GP teacher
+
+            }
         }
     }//GEN-LAST:event_teacher_optionsActionPerformed
 
@@ -1601,6 +1619,7 @@ public class FirstScreen extends javax.swing.JFrame {
     private javax.swing.JCheckBox checkStudent8;
     private javax.swing.JCheckBox checkStudent9;
     private javax.swing.JLabel chooseTeacherTxt;
+    private javax.swing.JLabel deselectionNotice;
     private javax.swing.JTextField enter_capacity;
     private javax.swing.JLabel explainMovingTxt;
     private javax.swing.JPanel firstPanel;
@@ -1643,6 +1662,5 @@ public class FirstScreen extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 }
 //TODO
-//1. deselect feature w/ no teacher option
-//2. no movement teacher
-//3. CSV work
+//1. no movement teacher option
+//2. CSV work (file reading --> need help with this tonight with adviser)

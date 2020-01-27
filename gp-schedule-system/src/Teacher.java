@@ -91,13 +91,21 @@ public class Teacher extends Person{
         String[] locations = new String[assignStudents.size()];
         for (int i = 0; i < assignStudents.size(); i++)
         {
-            if (((Student)(assignStudents.get(i))).getVisiTeacher() == null)
+            try
+            {
+                String loc = ((Student)(assignStudents.get(i))).getVisiTeacher().getID() + "";
+                if (loc.equals("0"))
+                {
+                    locations[i] = "Not Moving";
+                }
+                else
+                {
+                    locations[i] = ((Student)(assignStudents.get(i))).getVisiTeacher().getID() + ": " + ((Student)(assignStudents.get(i))).getVisiTeacher().getName();
+                }
+            }
+            catch (NullPointerException e) //catches for if deselected
             {
                 locations[i] = "Not Moving";
-            }
-            else
-            {
-                locations[i] = ((Student)(assignStudents.get(i))).getVisiTeacher().getID() + ": " + ((Student)(assignStudents.get(i))).getVisiTeacher().getName();
             }
         }
         return locations;
@@ -108,18 +116,25 @@ public class Teacher extends Person{
         String[] verify = new String[assignStudents.size()];
         for (int i = 0; i < assignStudents.size(); i++)
         {
-            if (((Student)(assignStudents.get(i))).getVisiTeacher() == null)
+            try
             {
-                verify[i] = "n/a";
+                String loc = ((Student)(assignStudents.get(i))).getVisiTeacher().getID() + "";
+                if (loc.equals("0"))            {
+                    verify[i] = "n/a";
+                }
+                if (((Student)(assignStudents.get(i))).isVerified())
+                {
+                    verify[i] = "Yes";
+                }
+                else
+                {
+                    verify[i] = "No";
+                }
             }
-            if (((Student)(assignStudents.get(i))).isVerified())
+            catch (NullPointerException e) //catches when deselected
             {
-                verify[i] = "Yes";
+                verify[i] = "n/a"; 
             }
-            else
-            {
-                verify[i] = "No";
-            }       
         }
         return verify;
     }
@@ -144,7 +159,6 @@ public class Teacher extends Person{
                 visiStudents.remove(i);
                 student.setVisiTeacher(null);
                 setvStudentCount();
-                return;
             }
         }
     }
