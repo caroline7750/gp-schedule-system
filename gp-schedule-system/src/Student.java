@@ -1,8 +1,8 @@
 public class Student extends Person {
     
     private String why_teacher;
-    private Teacher assignTeacher;
-    private Teacher visiTeacher;
+    private Teacher assignTeacher = new Teacher();
+    private Teacher visiTeacher = new Teacher();
     private boolean verified = false;
     private int assignTeachID;
 
@@ -67,14 +67,11 @@ public class Student extends Person {
 //        }
 //    }
     
-    public void deselect_teacher(Teacher t)
+    public void deselect_teacher()
     {
-        if(visiTeacher.equals(t))
-        {
-            visiTeacher = null;
-            why_teacher = null;
-            t.remove_student(this);
-        }
+        visiTeacher = null;
+        why_teacher = "";
+        setVerified(false);
     }
 
     public Teacher getAssignTeacher() {

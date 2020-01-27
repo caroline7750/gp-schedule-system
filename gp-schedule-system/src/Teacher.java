@@ -8,7 +8,7 @@ public class Teacher extends Person{
     
     private int capacity;
     private PersonLinkedList visiStudents = new PersonLinkedList(); 
-    private int vStudentCount = 0;
+    private int vStudentCount = visiStudents.size();
     private PersonLinkedList assignStudents = new PersonLinkedList();
     
     public Teacher(String name, int t_ID)
@@ -56,11 +56,11 @@ public class Teacher extends Person{
     
     public boolean add_student(Student student)
     {
-        if (vStudentCount < capacity - 1)
+        if (vStudentCount < capacity)
         {
             student.setVisiTeacher(this);
             this.visiStudents.add((Person) student);
-            vStudentCount++;
+            setvStudentCount();
             return true;
         }
         return false;
@@ -82,7 +82,6 @@ public class Teacher extends Person{
         for (int i = 0; i < assignStudents.size(); i++)
         {
             student[i] = assignStudents.get(i).getID() + ": " + assignStudents.get(i).getName();
-            System.out.println(student[i]);
         }
         return student;
     }
@@ -144,6 +143,7 @@ public class Teacher extends Person{
             {
                 visiStudents.remove(i);
                 student.setVisiTeacher(null);
+                setvStudentCount();
                 return;
             }
         }
@@ -166,7 +166,7 @@ public class Teacher extends Person{
         return vStudentCount;
     }
 
-    public void setvStudentCount(int vStudentCount) {
-        this.vStudentCount = vStudentCount;
+    public void setvStudentCount() {
+        this.vStudentCount = visiStudents.size();
     }
 }
