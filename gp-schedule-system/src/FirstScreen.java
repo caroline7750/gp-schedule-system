@@ -1,3 +1,8 @@
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+
 public class FirstScreen extends javax.swing.JFrame {
     public Schedule schedule;
     /**
@@ -1273,7 +1278,7 @@ public class FirstScreen extends javax.swing.JFrame {
             
             //STEPS:
             //1. get file & check if CSV format
-            //2. parse file for stuff - should prob know if teach or student
+            //2. needs to check if teacherID exists (check set), use searching, if not print warning
             //3. populate respective LLs
             
             SuccessImport.setVisible(true);
@@ -1292,13 +1297,46 @@ public class FirstScreen extends javax.swing.JFrame {
         }
         else if(evt.getActionCommand().equals("ApproveSelection"))
         {
-            //STEPS:
-            //1. get file & check if CSV format
-            //2. parse file for stuff - should prob know if teach or student
+            //should be able to get file regardless of location
+            //https://stackoverflow.com/questions/8444508/get-the-path-of-a-directory-using-jfilechooser
+            String csvFile = TeacherFileChooser.getSelectedFile().getAbsolutePath();
+
+            //https://mkyong.com/java/how-to-read-and-parse-csv-file-in-java/
+            BufferedReader br = null;
+            String line = "";
+            String cvsSplitBy = ","; //excel has feature, automically saves CSV excel exports with commas
+
+            try {
+                br = new BufferedReader(new FileReader(csvFile)); //creating reader
+                while ((line = br.readLine()) != null) { //whlile there's something in file, gonna keep reading
+
+                    // use comma as separator
+                    String[] teacher = line.split(cvsSplitBy); //two things, name & ID, idx 0 = name, idx 1 = ID
+
+                    System.out.println("Teacher [name= " + teacher[0] + " , ID=" + teacher[1] + "]");
+                }
+
+            } catch (FileNotFoundException e) {
+                //create GUI errors using warning label (if they delete file after choosing it)
+            } catch (IOException e) {
+                //create GUI errors using warning label (something went wrong when reading - smth like file unable to be read)
+            } finally //same if its outside try catch runs regardless
+            {
+                if (br != null) {
+                    try {
+                        br.close();
+                    } catch (IOException e) {
+                        //create GUI errors using warning label (something went wrong when closing - smth like file unable to close)
+                        //diff error message than one above b/c not necessarily wrong action
+                    }
+                }
+            }
+
+            //things to look for:
+            //1. get file & check if CSV format (check that right format), CSV or .txt extentions
+            //2. check if everything ID - store in sets - print warning if duplicate
             //3. populate respective LLs
-            
-            //testCASE
-            
+                        
             PersonLinkedList teachers = new PersonLinkedList();
             //test case b4 CSV importing works
             teachers.add(new Teacher("Mrs. Smith", 90));
@@ -1306,7 +1344,7 @@ public class FirstScreen extends javax.swing.JFrame {
             s.setTeachers(teachers);
             warningLabel.setVisible(false);
             updateTeacherComboBox();
-            teacherMenu.setVisible(false); //why does this trigger
+            teacherMenu.setVisible(false); 
             SuccessImport.setVisible(true);
         }
     }//GEN-LAST:event_TeacherFileChooserActionPerformed
@@ -1378,9 +1416,10 @@ public class FirstScreen extends javax.swing.JFrame {
     private void teacher_optionsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_teacher_optionsActionPerformed
         try
         {
+            deselectionNotice.setVisible(false);
+            why_teacher_txt.setText("");
             String selectedStr = "" + teacher_options.getSelectedItem();
             String idParse = selectedStr.substring(0,selectedStr.indexOf(":"));
-            System.out.println(selectedStr);
             int visiTeacherID = Integer.parseInt(idParse);
             Teacher tSel = s.getTeacherFromID(visiTeacherID);
             if (tSel.add_student((Student) user))
@@ -1402,7 +1441,6 @@ public class FirstScreen extends javax.swing.JFrame {
                 ((Student)user).deselect_teacher();   
                 successSelectNotice.setVisible(false);
                 deselectionNotice.setVisible(true);
-                
                 //update for assigned GP teacher
 
             }
@@ -1496,7 +1534,8 @@ public class FirstScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_checkStudent10ActionPerformed
 
     private void noMovementActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_noMovementActionPerformed
-        // TODO add your handling code here:
+        //check if any assigned students are moving
+        
     }//GEN-LAST:event_noMovementActionPerformed
 
     private void GoBackOptions1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GoBackOptions1ActionPerformed
@@ -1662,5 +1701,6 @@ public class FirstScreen extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 }
 //TODO
-//1. no movement teacher option
-//2. CSV work (file reading --> need help with this tonight with adviser)
+//1. no movement teacher option (program button - almost opposite of deselect)
+//2. CSV work (file reading --> need help with this tonight with adviser) @ 7 pm
+//   - figure out how to parse data based on what I can do
