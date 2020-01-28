@@ -1,7 +1,11 @@
+//file reading libraries
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.io.IOException;
+import java.io.IOException; //is this separate complexity
+
+//set library
+import java.util.*;
 
 public class FirstScreen extends javax.swing.JFrame {
     public Schedule schedule;
@@ -31,6 +35,7 @@ public class FirstScreen extends javax.swing.JFrame {
         capacityTooLargeLabel.setVisible(false);
         deselectionNotice.setVisible(false);
         //panels' visibility
+        
     }
 
     /**
@@ -825,7 +830,7 @@ public class FirstScreen extends javax.swing.JFrame {
             }
         });
 
-        jLabel2.setText("enter a CSV with name, ID, and teacher");
+        jLabel2.setText("enter a CSV with name, ID, and teacher ID");
 
         jLabel6.setText("enter a CSV with name and ID");
 
@@ -1256,30 +1261,59 @@ public class FirstScreen extends javax.swing.JFrame {
         }
         else if(evt.getActionCommand().equals("ApproveSelection"))
         {
-
-            PersonLinkedList students = new PersonLinkedList(); //set this to sample test case
-            students.add(new Student(104,"Katie", 90));
-            students.add(new Student(110, "Jessica", 80));
-            s.setStudents(students);
-            for (int i = 0; i < students.size(); i ++)
+            //should be able to get file regardless of location
+            //https://stackoverflow.com/questions/8444508/get-the-path-of-a-directory-using-jfilechooser
+            String csvFile = StudentFileChooser.getSelectedFile().getAbsolutePath();
+            if (csvFile.contains(".csv"))
             {
-                Student student = (Student) students.get(i);
-                Teacher t = s.getTeacherFromID(student.getAssignTeachID());
-                student.set_teacher(t);
-                PersonLinkedList ll = t.getAssignStudents();
-                ll.add(student);
-                t.setAssignStudents(ll);
-            }
+                //https://mkyong.com/java/how-to-read-and-parse-csv-file-in-java/
+                BufferedReader br = null;
+                String line = ""; //want that in case empty file
+                String cvsSplitBy = ","; //excel has feature, automically saves CSV excel exports with commas
 
-            //SelectStudent = javax.swing.JComboBox<>(s.getStudentsForCombo());
-            //set JComboBox with students' names
-            
-            //loop through CSV rows (get # rows as four loop bounds)
-            
-            //STEPS:
-            //1. get file & check if CSV format
-            //2. needs to check if teacherID exists (check set), use searching, if not print warning
-            //3. populate respective LLs
+                PersonLinkedList students = new PersonLinkedList();
+                //2. needs to check if teacherID exists (check set), use searching, if not print warning
+
+                try {
+                    br = new BufferedReader(new FileReader(csvFile)); //creating reader
+                    while ((line = br.readLine()) != null) { //whlile there's something in file, gonna keep reading
+
+                        // use comma as separator
+                        String[] student = line.split(cvsSplitBy); //two things, name & ID, idx 0 = name, idx 1 = ID
+                        int setSize = sIdSet.size();
+                        sIdSet.add(Integer.parseInt(student[1]));
+                        if (setSize == sIdSet.size() - 1) //checks to make sure all elems unique
+                        {
+                            students.add(new Student(Integer.parseInt(student[1]), student[0], Integer.parseInt(student[2])));
+                        }
+                        //display warning here!!
+                    }
+
+                } catch (FileNotFoundException e) {
+                    //create GUI errors using warning label (if they delete file after choosing it)
+                } catch (IOException e) {
+                    //create GUI errors using warning label (something went wrong when reading - smth like file unable to be read)
+                } finally //same if its outside try catch runs regardless
+                {
+                    if (br != null) {
+                        try {
+                            br.close();
+                        } catch (IOException e) {
+                            //create GUI errors using warning label (something went wrong when closing - smth like file unable to close)
+                            //diff error message than one above b/c not necessarily wrong action
+                        }
+                    }
+                }
+                s.setStudents(students);
+                warningLabel.setVisible(false);
+                updateStudentComboBox();
+                studentMenu.setVisible(false); 
+                SuccessImport.setVisible(true);
+            }
+            else
+            {
+//               error message for wrong file format   
+            }
             
             SuccessImport.setVisible(true);
             StudentOpenCSV.setVisible(false);
@@ -1300,52 +1334,56 @@ public class FirstScreen extends javax.swing.JFrame {
             //should be able to get file regardless of location
             //https://stackoverflow.com/questions/8444508/get-the-path-of-a-directory-using-jfilechooser
             String csvFile = TeacherFileChooser.getSelectedFile().getAbsolutePath();
-
-            //https://mkyong.com/java/how-to-read-and-parse-csv-file-in-java/
-            BufferedReader br = null;
-            String line = "";
-            String cvsSplitBy = ","; //excel has feature, automically saves CSV excel exports with commas
-
-            try {
-                br = new BufferedReader(new FileReader(csvFile)); //creating reader
-                while ((line = br.readLine()) != null) { //whlile there's something in file, gonna keep reading
-
-                    // use comma as separator
-                    String[] teacher = line.split(cvsSplitBy); //two things, name & ID, idx 0 = name, idx 1 = ID
-
-                    System.out.println("Teacher [name= " + teacher[0] + " , ID=" + teacher[1] + "]");
-                }
-
-            } catch (FileNotFoundException e) {
-                //create GUI errors using warning label (if they delete file after choosing it)
-            } catch (IOException e) {
-                //create GUI errors using warning label (something went wrong when reading - smth like file unable to be read)
-            } finally //same if its outside try catch runs regardless
+            if (csvFile.contains(".csv"))
             {
-                if (br != null) {
-                    try {
-                        br.close();
-                    } catch (IOException e) {
-                        //create GUI errors using warning label (something went wrong when closing - smth like file unable to close)
-                        //diff error message than one above b/c not necessarily wrong action
+                //https://mkyong.com/java/how-to-read-and-parse-csv-file-in-java/
+                BufferedReader br = null;
+                String line = ""; //want that in case empty file
+                String cvsSplitBy = ","; //excel has feature, automically saves CSV excel exports with commas
+
+                PersonLinkedList teachers = new PersonLinkedList();
+
+                try {
+                    br = new BufferedReader(new FileReader(csvFile)); //creating reader
+                    while ((line = br.readLine()) != null) { //whlile there's something in file, gonna keep reading
+
+                        // use comma as separator
+                        String[] teacher = line.split(cvsSplitBy); //two things, name & ID, idx 0 = name, idx 1 = ID
+                        int setSize = tIdSet.size();
+                        tIdSet.add(Integer.parseInt(teacher[1]));
+                        if (setSize == tIdSet.size() - 1) //checks to make sure all elems unique
+                        {
+                            teachers.add(new Teacher(teacher[0], Integer.parseInt(teacher[1])));
+                        }
+                        //display warning here!!
+                    }
+
+                } catch (FileNotFoundException e) {
+                    //create GUI errors using warning label (if they delete file after choosing it)
+                } catch (IOException e) {
+                    //create GUI errors using warning label (something went wrong when reading - smth like file unable to be read)
+                } finally //same if its outside try catch runs regardless
+                {
+                    if (br != null) {
+                        try {
+                            br.close();
+                        } catch (IOException e) {
+                            //create GUI errors using warning label (something went wrong when closing - smth like file unable to close)
+                            //diff error message than one above b/c not necessarily wrong action
+                        }
                     }
                 }
+                s.setTeachers(teachers); //same
+                warningLabel.setVisible(false);
+                updateTeacherComboBox(); //why is this repeated
+                teacherMenu.setVisible(false); 
+                SuccessImport.setVisible(true);
             }
-
-            //things to look for:
-            //1. get file & check if CSV format (check that right format), CSV or .txt extentions
-            //2. check if everything ID - store in sets - print warning if duplicate
-            //3. populate respective LLs
+            else
+            {
+//               error message for wrong file format   
+            }
                         
-            PersonLinkedList teachers = new PersonLinkedList();
-            //test case b4 CSV importing works
-            teachers.add(new Teacher("Mrs. Smith", 90));
-            teachers.add(new Teacher("Mrs. Banks", 80));
-            s.setTeachers(teachers);
-            warningLabel.setVisible(false);
-            updateTeacherComboBox();
-            teacherMenu.setVisible(false); 
-            SuccessImport.setVisible(true);
         }
     }//GEN-LAST:event_TeacherFileChooserActionPerformed
 
@@ -1607,7 +1645,10 @@ public class FirstScreen extends javax.swing.JFrame {
             }
         });
     }
-    
+    Set<Integer> tIdSet = new HashSet<Integer>(); //created set
+    Set<Integer> sIdSet = new HashSet<Integer>(); //created set
+    //set source: https://www.geeksforgeeks.org/initializing-hashset-java/
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton AdminButton;
     private javax.swing.JList<String> AssignedStudentLocations;
@@ -1702,5 +1743,4 @@ public class FirstScreen extends javax.swing.JFrame {
 }
 //TODO
 //1. no movement teacher option (program button - almost opposite of deselect)
-//2. CSV work (file reading --> need help with this tonight with adviser) @ 7 pm
-//   - figure out how to parse data based on what I can do
+//2. CSV work
