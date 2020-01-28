@@ -10,6 +10,7 @@ public class Student extends Person {
     {
         super(name, ID);
         this.assignTeachID = assignTeachID;
+    
         
         //need to search for ID and assign it to teacher
         //pre-check that ID existing (do this in file processing)

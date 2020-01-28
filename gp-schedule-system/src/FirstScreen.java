@@ -2,7 +2,7 @@
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
-import java.io.IOException; //is this separate complexity
+import java.io.IOException; 
 
 //set library
 import java.util.*;
@@ -540,12 +540,14 @@ public class FirstScreen extends javax.swing.JFrame {
 
         program_txt_title.setText("GP Schedule System");
 
+        visiStudentList.setFixedCellWidth(300);
         visiStudentScroll.setViewportView(visiStudentList);
 
         jLabel1.setText("List of Reasons");
 
         jLabel3.setText("List of Visiting Students");
 
+        ListReasons.setFixedCellWidth(300);
         ReasonsScroll.setViewportView(ListReasons);
 
         jLabel4.setText("Verify Presence");
@@ -968,7 +970,7 @@ public class FirstScreen extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(13, 13, 13)
                 .addComponent(firstPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(689, Short.MAX_VALUE))
+                .addContainerGap(740, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
@@ -1305,6 +1307,15 @@ public class FirstScreen extends javax.swing.JFrame {
                     }
                 }
                 s.setStudents(students);
+                for (int i = 0; i < students.size(); i ++)
+                {
+                    Student student = (Student) students.get(i);
+                    Teacher t = s.getTeacherFromID(student.getAssignTeachID());
+                    student.set_teacher(t);
+                    PersonLinkedList ll = t.getAssignStudents();
+                    ll.add(student);
+                    t.setAssignStudents(ll);
+                }
                 warningLabel.setVisible(false);
                 updateStudentComboBox();
                 studentMenu.setVisible(false); 
@@ -1741,6 +1752,6 @@ public class FirstScreen extends javax.swing.JFrame {
     private javax.swing.JTextField why_teacher_txt;
     // End of variables declaration//GEN-END:variables
 }
-//TODO
+//TODO:
 //1. no movement teacher option (program button - almost opposite of deselect)
 //2. CSV work
