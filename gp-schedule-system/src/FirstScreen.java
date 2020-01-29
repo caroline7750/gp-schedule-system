@@ -4,7 +4,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException; 
 
-//set library
+//sets library
 import java.util.*;
 
 public class FirstScreen extends javax.swing.JFrame {
@@ -138,6 +138,7 @@ public class FirstScreen extends javax.swing.JFrame {
         TeacherOpenCSV = new javax.swing.JPanel();
         TeacherFileChooser = new javax.swing.JFileChooser();
         StudentOpenCSV = new javax.swing.JPanel();
+        jInternalFrame1 = new javax.swing.JInternalFrame();
         StudentFileChooser = new javax.swing.JFileChooser();
         SuccessImport = new javax.swing.JPanel();
         SuccessImportTxt = new javax.swing.JLabel();
@@ -643,7 +644,7 @@ public class FirstScreen extends javax.swing.JFrame {
                         .addComponent(visiStudentScroll, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(76, 76, 76)
                         .addComponent(ReasonsScroll, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 147, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 148, Short.MAX_VALUE)
                         .addGroup(SeeVisitingGPStudentsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(checkStudent4, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(checkStudent5, javax.swing.GroupLayout.Alignment.TRAILING)
@@ -665,7 +666,7 @@ public class FirstScreen extends javax.swing.JFrame {
                     .addGroup(SeeVisitingGPStudentsLayout.createSequentialGroup()
                         .addGap(122, 122, 122)
                         .addComponent(program_txt_title)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 548, Short.MAX_VALUE)
                         .addComponent(jLabel4)))
                 .addGap(14, 14, 14))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, SeeVisitingGPStudentsLayout.createSequentialGroup()
@@ -739,6 +740,7 @@ public class FirstScreen extends javax.swing.JFrame {
                         .addGap(0, 0, Short.MAX_VALUE))))
         );
 
+        assignedStudentList.setFixedCellWidth(300);
         assignedStudentScroll.setViewportView(assignedStudentList);
 
         noMovement.setText("no movement");
@@ -748,6 +750,7 @@ public class FirstScreen extends javax.swing.JFrame {
             }
         });
 
+        AssignedStudentLocations.setFixedCellWidth(300);
         assignedPresent.setViewportView(AssignedStudentLocations);
 
         verifiedStatus.setText("Verified");
@@ -756,6 +759,7 @@ public class FirstScreen extends javax.swing.JFrame {
 
         AssignedStudents.setText("Assigned Students");
 
+        VerifiedList.setFixedCellWidth(300);
         VerifiedScrollPane.setViewportView(VerifiedList);
 
         GoBackOptions1.setText("Go back to Options");
@@ -774,7 +778,7 @@ public class FirstScreen extends javax.swing.JFrame {
                 .addGroup(SeeAssignedGPStudentsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(SeeAssignedGPStudentsLayout.createSequentialGroup()
                         .addComponent(assignedStudentScroll, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(assignedPresent, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(VerifiedScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -786,11 +790,11 @@ public class FirstScreen extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, SeeAssignedGPStudentsLayout.createSequentialGroup()
                 .addGap(77, 77, 77)
                 .addComponent(AssignedStudents)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(213, 213, 213)
                 .addComponent(studentsLocations)
-                .addGap(188, 188, 188)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(verifiedStatus)
-                .addGap(144, 144, 144))
+                .addGap(155, 155, 155))
             .addGroup(SeeAssignedGPStudentsLayout.createSequentialGroup()
                 .addGap(327, 327, 327)
                 .addComponent(GoBackOptions1)
@@ -906,6 +910,8 @@ public class FirstScreen extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        jInternalFrame1.setVisible(true);
+
         StudentFileChooser.setApproveButtonText("");
         StudentFileChooser.setApproveButtonToolTipText("");
         StudentFileChooser.addActionListener(new java.awt.event.ActionListener() {
@@ -914,21 +920,38 @@ public class FirstScreen extends javax.swing.JFrame {
             }
         });
 
+        javax.swing.GroupLayout jInternalFrame1Layout = new javax.swing.GroupLayout(jInternalFrame1.getContentPane());
+        jInternalFrame1.getContentPane().setLayout(jInternalFrame1Layout);
+        jInternalFrame1Layout.setHorizontalGroup(
+            jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jInternalFrame1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(StudentFileChooser, javax.swing.GroupLayout.PREFERRED_SIZE, 754, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(51, Short.MAX_VALUE))
+        );
+        jInternalFrame1Layout.setVerticalGroup(
+            jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jInternalFrame1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(StudentFileChooser, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+
         javax.swing.GroupLayout StudentOpenCSVLayout = new javax.swing.GroupLayout(StudentOpenCSV);
         StudentOpenCSV.setLayout(StudentOpenCSVLayout);
         StudentOpenCSVLayout.setHorizontalGroup(
             StudentOpenCSVLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(StudentOpenCSVLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(StudentFileChooser, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jInternalFrame1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(140, Short.MAX_VALUE))
         );
         StudentOpenCSVLayout.setVerticalGroup(
             StudentOpenCSVLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, StudentOpenCSVLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(StudentFileChooser, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+            .addGroup(StudentOpenCSVLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jInternalFrame1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(18, Short.MAX_VALUE))
         );
 
         SuccessImportTxt.setText("You have successfully imported!");
@@ -970,7 +993,7 @@ public class FirstScreen extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(13, 13, 13)
                 .addComponent(firstPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(740, Short.MAX_VALUE))
+                .addContainerGap(898, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
@@ -1027,7 +1050,7 @@ public class FirstScreen extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(firstPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(134, Short.MAX_VALUE))
+                .addContainerGap(192, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
@@ -1260,6 +1283,7 @@ public class FirstScreen extends javax.swing.JFrame {
         if(evt.getActionCommand().equals("CancelSelection"))
         {
             adminPanel.setVisible(true);
+            StudentOpenCSV.setVisible(false);
         }
         else if(evt.getActionCommand().equals("ApproveSelection"))
         {
@@ -1293,9 +1317,18 @@ public class FirstScreen extends javax.swing.JFrame {
 
                 } catch (FileNotFoundException e) {
                     //create GUI errors using warning label (if they delete file after choosing it)
-                } catch (IOException e) {
+                }
+                  catch (IOException e) 
+                    {
                     //create GUI errors using warning label (something went wrong when reading - smth like file unable to be read)
-                } finally //same if its outside try catch runs regardless
+                    }
+                catch (ArrayIndexOutOfBoundsException e)
+                {
+                    //not enough columns to process
+
+                }
+                    
+                finally //same if its outside try catch runs regardless
                 {
                     if (br != null) {
                         try {
@@ -1339,6 +1372,7 @@ public class FirstScreen extends javax.swing.JFrame {
         if(evt.getActionCommand().equals("CancelSelection"))
         {
             adminPanel.setVisible(true);
+            TeacherOpenCSV.setVisible(false);
         }
         else if(evt.getActionCommand().equals("ApproveSelection"))
         {
@@ -1364,7 +1398,7 @@ public class FirstScreen extends javax.swing.JFrame {
                         tIdSet.add(Integer.parseInt(teacher[1]));
                         if (setSize == tIdSet.size() - 1) //checks to make sure all elems unique
                         {
-                            teachers.add(new Teacher(teacher[0], Integer.parseInt(teacher[1])));
+                            teachers.add(new Teacher(Integer.parseInt(teacher[1]), teacher[0]));
                         }
                         //display warning here!!
                     }
@@ -1420,44 +1454,26 @@ public class FirstScreen extends javax.swing.JFrame {
 
     private boolean unique_ID (int ID, javax.swing.JComboBox<String> box)
     {
+        enteredIDs.clear();
         //code modified from https://kodejava.org/how-do-i-get-items-of-jcombobox/
         if (box == null)
         {
             return true;
         }
         int count = box.getItemCount();
-        int[] entered_IDs;
-        if (box == teacher_options)
-        {
-            entered_IDs = new int[count-1];            
-            for (int i = 1; i < count; i++) { //skipping "no teacher" option in combo
-                if (box.getItemAt(i).equals("No Teacher"))
-                {
-                    continue;
-                }
-                entered_IDs[i-1]= Integer.parseInt(box.getItemAt(i));
-            }
-        }
-        else if (box == SelectStudent || box == SelectTeacher)
-        {
-            entered_IDs = new int[count];
-            for (int i = 0; i < count; i++) 
-            { 
-            String item = box.getItemAt(i);
-            String idParse = item.substring(0,item.indexOf(":"));
-            entered_IDs[i]= Integer.parseInt(idParse);
-            }
-        }
-        else
-        {
-            entered_IDs = new int[count]; //init to rando amount 
-        }
-        for (int i = 0; i < entered_IDs.length; i++)
-        {
-            if(ID == entered_IDs[i])
+        for (int i = 0; i < count; i++) 
+        { //skipping "no teacher" option in combo
+            if (box.getItemAt(i).equals("No Teacher"))
             {
-                return false;
+                continue;
             }
+            String item = box.getItemAt(i);
+            String idParse = item.substring(0, item.indexOf(":"));
+            enteredIDs.add(Integer.parseInt(idParse));
+        }
+        if(enteredIDs.contains(Integer.parseInt(ID + "")))
+        {
+            return false;
         }
         return true;
     }
@@ -1583,7 +1599,10 @@ public class FirstScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_checkStudent10ActionPerformed
 
     private void noMovementActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_noMovementActionPerformed
+        
         //check if any assigned students are moving
+        //loop through assigned students
+        //if they are moving, have them deselect teacher
         
     }//GEN-LAST:event_noMovementActionPerformed
 
@@ -1658,6 +1677,10 @@ public class FirstScreen extends javax.swing.JFrame {
     }
     Set<Integer> tIdSet = new HashSet<Integer>(); //created set
     Set<Integer> sIdSet = new HashSet<Integer>(); //created set
+    
+    Set<Integer> enteredIDs = new HashSet<Integer>(); //created set for unique_ID func
+    
+    
     //set source: https://www.geeksforgeeks.org/initializing-hashset-java/
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -1717,6 +1740,7 @@ public class FirstScreen extends javax.swing.JFrame {
     private javax.swing.JLabel guidingtxt1;
     private javax.swing.JButton importStudents;
     private javax.swing.JButton importTeachers;
+    private javax.swing.JInternalFrame jInternalFrame1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

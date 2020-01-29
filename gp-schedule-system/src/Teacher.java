@@ -11,7 +11,7 @@ public class Teacher extends Person{
     private int vStudentCount = visiStudents.size();
     private PersonLinkedList assignStudents = new PersonLinkedList();
     
-    public Teacher(String name, int t_ID)
+    public Teacher(int t_ID, String name)
     {
         super(name, t_ID);
         capacity = 10; //default capacity
