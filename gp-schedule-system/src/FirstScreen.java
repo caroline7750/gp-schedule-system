@@ -32,8 +32,10 @@ public class FirstScreen extends javax.swing.JFrame {
         SelectStudent.setEnabled(true);
         capacityFullNotice.setVisible(false);
         successSelectNotice.setVisible(false);
-        capacityTooLargeLabel.setVisible(false);
+        capacityErrorLabel.setVisible(false);
         deselectionNotice.setVisible(false);
+        fileErrorStudent.setVisible(false);
+        fileErrorTeacher.setVisible(false);
         //panels' visibility
         
     }
@@ -53,14 +55,6 @@ public class FirstScreen extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        FirstScreenStudent = new javax.swing.JFrame();
-        StudentFirstScreen = new javax.swing.JFrame();
-        jLabel5 = new javax.swing.JLabel();
-        StudentButton1 = new javax.swing.JButton();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        jPanel1 = new javax.swing.JPanel();
-        GoHomeScreenTeacherMenu1 = new javax.swing.JButton();
         firstPanel = new javax.swing.JPanel();
         AdminButton = new javax.swing.JButton();
         StudentButton = new javax.swing.JButton();
@@ -115,7 +109,7 @@ public class FirstScreen extends javax.swing.JFrame {
         checkStudent8 = new javax.swing.JCheckBox();
         checkStudent9 = new javax.swing.JCheckBox();
         checkStudent10 = new javax.swing.JCheckBox();
-        capacityTooLargeLabel = new javax.swing.JLabel();
+        capacityErrorLabel = new javax.swing.JLabel();
         SeeAssignedGPStudents = new javax.swing.JPanel();
         assignedStudentScroll = new javax.swing.JScrollPane();
         assignedStudentList = new javax.swing.JList<>();
@@ -137,69 +131,14 @@ public class FirstScreen extends javax.swing.JFrame {
         warningLabel = new javax.swing.JLabel();
         TeacherOpenCSV = new javax.swing.JPanel();
         TeacherFileChooser = new javax.swing.JFileChooser();
+        fileErrorTeacher = new javax.swing.JLabel();
         StudentOpenCSV = new javax.swing.JPanel();
         jInternalFrame1 = new javax.swing.JInternalFrame();
         StudentFileChooser = new javax.swing.JFileChooser();
+        fileErrorStudent = new javax.swing.JLabel();
         SuccessImport = new javax.swing.JPanel();
         SuccessImportTxt = new javax.swing.JLabel();
         GoHomeScreen = new javax.swing.JButton();
-
-        javax.swing.GroupLayout FirstScreenStudentLayout = new javax.swing.GroupLayout(FirstScreenStudent.getContentPane());
-        FirstScreenStudent.getContentPane().setLayout(FirstScreenStudentLayout);
-        FirstScreenStudentLayout.setHorizontalGroup(
-            FirstScreenStudentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
-        );
-        FirstScreenStudentLayout.setVerticalGroup(
-            FirstScreenStudentLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
-        );
-
-        javax.swing.GroupLayout StudentFirstScreenLayout = new javax.swing.GroupLayout(StudentFirstScreen.getContentPane());
-        StudentFirstScreen.getContentPane().setLayout(StudentFirstScreenLayout);
-        StudentFirstScreenLayout.setHorizontalGroup(
-            StudentFirstScreenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
-        );
-        StudentFirstScreenLayout.setVerticalGroup(
-            StudentFirstScreenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
-        );
-
-        jLabel5.setText("Select Yourself:");
-
-        StudentButton1.setText("Student");
-        StudentButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                StudentButton1ActionPerformed(evt);
-            }
-        });
-
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jScrollPane3.setViewportView(jTable1);
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 100, Short.MAX_VALUE)
-        );
-
-        GoHomeScreenTeacherMenu1.setText("Go to Home Screen");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -628,7 +567,7 @@ public class FirstScreen extends javax.swing.JFrame {
             }
         });
 
-        capacityTooLargeLabel.setText("capacity must be less than or equal to 10");
+        capacityErrorLabel.setText("capacity must be a number between 0 and 10, inclusive");
 
         javax.swing.GroupLayout SeeVisitingGPStudentsLayout = new javax.swing.GroupLayout(SeeVisitingGPStudents);
         SeeVisitingGPStudents.setLayout(SeeVisitingGPStudentsLayout);
@@ -681,7 +620,7 @@ public class FirstScreen extends javax.swing.JFrame {
                         .addGap(87, 87, 87))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, SeeVisitingGPStudentsLayout.createSequentialGroup()
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(capacityTooLargeLabel)
+                        .addComponent(capacityErrorLabel)
                         .addGap(100, 100, 100)))
                 .addComponent(checkStudent10)
                 .addContainerGap())
@@ -718,7 +657,7 @@ public class FirstScreen extends javax.swing.JFrame {
                                     .addComponent(enter_capacity, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(set_capacity_txt))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(capacityTooLargeLabel))
+                                .addComponent(capacityErrorLabel))
                             .addGroup(SeeVisitingGPStudentsLayout.createSequentialGroup()
                                 .addComponent(GoBackOptions)
                                 .addGap(0, 0, Short.MAX_VALUE)))
@@ -893,21 +832,28 @@ public class FirstScreen extends javax.swing.JFrame {
             }
         });
 
+        fileErrorTeacher.setText("CSV Error: ");
+
         javax.swing.GroupLayout TeacherOpenCSVLayout = new javax.swing.GroupLayout(TeacherOpenCSV);
         TeacherOpenCSV.setLayout(TeacherOpenCSVLayout);
         TeacherOpenCSVLayout.setHorizontalGroup(
             TeacherOpenCSVLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(TeacherOpenCSVLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(TeacherFileChooser, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(fileErrorTeacher)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(TeacherFileChooser, javax.swing.GroupLayout.DEFAULT_SIZE, 490, Short.MAX_VALUE))
         );
         TeacherOpenCSVLayout.setVerticalGroup(
             TeacherOpenCSVLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, TeacherOpenCSVLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(TeacherFileChooser, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+            .addGroup(TeacherOpenCSVLayout.createSequentialGroup()
+                .addGroup(TeacherOpenCSVLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(TeacherOpenCSVLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(TeacherFileChooser, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(TeacherOpenCSVLayout.createSequentialGroup()
+                        .addGap(16, 16, 16)
+                        .addComponent(fileErrorTeacher)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jInternalFrame1.setVisible(true);
@@ -920,19 +866,28 @@ public class FirstScreen extends javax.swing.JFrame {
             }
         });
 
+        fileErrorStudent.setText("CSV Error: ");
+
         javax.swing.GroupLayout jInternalFrame1Layout = new javax.swing.GroupLayout(jInternalFrame1.getContentPane());
         jInternalFrame1.getContentPane().setLayout(jInternalFrame1Layout);
         jInternalFrame1Layout.setHorizontalGroup(
             jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jInternalFrame1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(StudentFileChooser, javax.swing.GroupLayout.PREFERRED_SIZE, 754, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(51, Short.MAX_VALUE))
+                .addGroup(jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jInternalFrame1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(StudentFileChooser, javax.swing.GroupLayout.PREFERRED_SIZE, 754, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jInternalFrame1Layout.createSequentialGroup()
+                        .addGap(14, 14, 14)
+                        .addComponent(fileErrorStudent)))
+                .addContainerGap(283, Short.MAX_VALUE))
         );
         jInternalFrame1Layout.setVerticalGroup(
             jInternalFrame1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jInternalFrame1Layout.createSequentialGroup()
                 .addContainerGap()
+                .addComponent(fileErrorStudent)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(StudentFileChooser, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -944,14 +899,14 @@ public class FirstScreen extends javax.swing.JFrame {
             .addGroup(StudentOpenCSVLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jInternalFrame1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(140, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         StudentOpenCSVLayout.setVerticalGroup(
             StudentOpenCSVLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(StudentOpenCSVLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jInternalFrame1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(18, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         SuccessImportTxt.setText("You have successfully imported!");
@@ -993,7 +948,7 @@ public class FirstScreen extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(13, 13, 13)
                 .addComponent(firstPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(898, Short.MAX_VALUE))
+                .addContainerGap(818, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
@@ -1140,7 +1095,6 @@ public class FirstScreen extends javax.swing.JFrame {
             String idParse = selectedStr.substring(0,selectedStr.indexOf(":"));
             user = s.getStudentFromID(Integer.parseInt(idParse));
         }
-        
         if (s.getStudents() != null && s.getTeachers() != null)
         {
             if (teacher_options.getItemCount() > 1)
@@ -1218,43 +1172,42 @@ public class FirstScreen extends javax.swing.JFrame {
     }
     
     private void enter_capacityActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enter_capacityActionPerformed
-        int capacity = Integer.parseInt(enter_capacity.getText());
-        if (capacity <= 10)
+
+        try
         {
-            ((Teacher) user).setCapacity(capacity);
-            capacityTooLargeLabel.setVisible(false);
-        }
-        else
-            capacityTooLargeLabel.setVisible(true);
-        if (capacity < ((Teacher)(user)).getvStudentCount())
-        {
-            PersonLinkedList vStudents = ((Teacher)user).getVisiStudents();
-            for (int i = capacity; i < ((Teacher)(user)).getvStudentCount(); i++)
+            int capacity = Integer.parseInt(enter_capacity.getText());
+            if (capacity <= 10 && capacity >= 0)
             {
-                ((Student)(vStudents.get(i))).deselect_teacher();
-                 vStudents.remove(i);
+                ((Teacher) user).setCapacity(capacity);
+                capacityErrorLabel.setVisible(false);
             }
-            ((Teacher)user).setVisiStudents(vStudents);
-            ((Teacher)user).setvStudentCount();
-            updateVisiStudents();
+            else
+                capacityErrorLabel.setVisible(true);
+            if (capacity < ((Teacher)(user)).getvStudentCount() && capacity >= 0)
+            {
+                PersonLinkedList vStudents = ((Teacher)user).getVisiStudents();
+                for (int i = capacity; i < ((Teacher)(user)).getvStudentCount(); i++)
+                {
+                    ((Student)(vStudents.get(i))).deselect_teacher();
+                     vStudents.remove(i);
+                }
+                ((Teacher)user).setVisiStudents(vStudents);
+                ((Teacher)user).setvStudentCount();
+                updateVisiStudents();
+            }
+        }
+        catch (NumberFormatException e)
+        {
+            capacityErrorLabel.setVisible(true);
         }
     }//GEN-LAST:event_enter_capacityActionPerformed
 
     private void seeVisibleGPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_seeVisibleGPActionPerformed
         teacherMenu.setVisible(false);
+        enter_capacity.setText("");
         SeeVisitingGPStudents.setVisible(true);
         updateVisiStudents();
-        
-        // TODO add your handling code here:
     }//GEN-LAST:event_seeVisibleGPActionPerformed
-
-    private void StudentButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_StudentButton1ActionPerformed
-        //show option to import CSV
-        //maybe do it so students & teachers on same frame
-        //import CSV
-        //parse CSV for name & ID
-
-    }//GEN-LAST:event_StudentButton1ActionPerformed
 
     private void TeacherButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TeacherButtonActionPerformed
         firstPanel.setVisible(false);
@@ -1279,7 +1232,7 @@ public class FirstScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_importTeachersActionPerformed
 
     private void StudentFileChooserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_StudentFileChooserActionPerformed
-
+        fileErrorStudent.setVisible(false);
         if(evt.getActionCommand().equals("CancelSelection"))
         {
             adminPanel.setVisible(true);
@@ -1313,19 +1266,26 @@ public class FirstScreen extends javax.swing.JFrame {
                             students.add(new Student(Integer.parseInt(student[1]), student[0], Integer.parseInt(student[2])));
                         }
                         //display warning here!!
+                        
+                    SuccessImport.setVisible(true);
+                    StudentOpenCSV.setVisible(false);
+                    updateStudentComboBox();
+                    studentMenu.setVisible(false); 
                     }
 
                 } catch (FileNotFoundException e) {
-                    //create GUI errors using warning label (if they delete file after choosing it)
+                    fileErrorStudent.setText("File not found error. Re-import file.");
+                    fileErrorStudent.setVisible(true);
                 }
                   catch (IOException e) 
                     {
-                    //create GUI errors using warning label (something went wrong when reading - smth like file unable to be read)
+                    fileErrorStudent.setText("Input output error. Re-import file.");
+                    fileErrorStudent.setVisible(true);
                     }
                 catch (ArrayIndexOutOfBoundsException e)
                 {
-                    //not enough columns to process
-
+                    fileErrorStudent.setText("Make sure you have a Name, ID, and teacher ID for each student. Re-import file.");
+                    fileErrorStudent.setVisible(true);
                 }
                     
                 finally //same if its outside try catch runs regardless
@@ -1334,8 +1294,8 @@ public class FirstScreen extends javax.swing.JFrame {
                         try {
                             br.close();
                         } catch (IOException e) {
-                            //create GUI errors using warning label (something went wrong when closing - smth like file unable to close)
-                            //diff error message than one above b/c not necessarily wrong action
+                        fileErrorStudent.setText("File unable to close.");
+                        fileErrorStudent.setVisible(true);
                         }
                     }
                 }
@@ -1356,18 +1316,13 @@ public class FirstScreen extends javax.swing.JFrame {
             }
             else
             {
-//               error message for wrong file format   
+                fileErrorStudent.setText("Please upload a CSV file");
+                fileErrorStudent.setVisible(true);
             }
-            
-            SuccessImport.setVisible(true);
-            StudentOpenCSV.setVisible(false);
-            updateStudentComboBox();
-            studentMenu.setVisible(false); 
         }
     }//GEN-LAST:event_StudentFileChooserActionPerformed
 
     private void TeacherFileChooserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TeacherFileChooserActionPerformed
-        TeacherOpenCSV.setVisible(false);
         
         if(evt.getActionCommand().equals("CancelSelection"))
         {
@@ -1400,33 +1355,39 @@ public class FirstScreen extends javax.swing.JFrame {
                         {
                             teachers.add(new Teacher(Integer.parseInt(teacher[1]), teacher[0]));
                         }
-                        //display warning here!!
+                    s.setTeachers(teachers); //same
+                    warningLabel.setVisible(false);
+                    updateTeacherComboBox(); //why is this repeated
+                    teacherMenu.setVisible(false); 
+                    SuccessImport.setVisible(true);
                     }
 
                 } catch (FileNotFoundException e) {
-                    //create GUI errors using warning label (if they delete file after choosing it)
+                    fileErrorTeacher.setText("File not found error. Re-import file.");
+                    fileErrorTeacher.setVisible(true);
                 } catch (IOException e) {
-                    //create GUI errors using warning label (something went wrong when reading - smth like file unable to be read)
+                    fileErrorTeacher.setText("Input output error. Re-import file.");
+                    fileErrorTeacher.setVisible(true);
+                }
+                  catch (ArrayIndexOutOfBoundsException e){
+                    fileErrorTeacher.setText("Make sure you have a Name and ID for each . Re-import file.");
+                    fileErrorTeacher.setVisible(true);
                 } finally //same if its outside try catch runs regardless
                 {
                     if (br != null) {
                         try {
                             br.close();
                         } catch (IOException e) {
-                            //create GUI errors using warning label (something went wrong when closing - smth like file unable to close)
-                            //diff error message than one above b/c not necessarily wrong action
+                        fileErrorTeacher.setText("File unable to close.");
+                        fileErrorTeacher.setVisible(true);
                         }
                     }
                 }
-                s.setTeachers(teachers); //same
-                warningLabel.setVisible(false);
-                updateTeacherComboBox(); //why is this repeated
-                teacherMenu.setVisible(false); 
-                SuccessImport.setVisible(true);
             }
             else
             {
-//               error message for wrong file format   
+                fileErrorTeacher.setText("Please upload a CSV file");
+                fileErrorTeacher.setVisible(true);
             }
                         
         }
@@ -1479,9 +1440,11 @@ public class FirstScreen extends javax.swing.JFrame {
     }
             
     private void teacher_optionsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_teacher_optionsActionPerformed
+        successSelectNotice.setVisible(false);
+        successSelectNotice.setVisible(false);
+        deselectionNotice.setVisible(false);
         try
         {
-            deselectionNotice.setVisible(false);
             why_teacher_txt.setText("");
             String selectedStr = "" + teacher_options.getSelectedItem();
             String idParse = selectedStr.substring(0,selectedStr.indexOf(":"));
@@ -1494,13 +1457,14 @@ public class FirstScreen extends javax.swing.JFrame {
             }
             else
             {
-                capacityFullNotice.setVisible(true);
+                successSelectNotice.setVisible(true);
                 successSelectNotice.setVisible(false);
             }
         }
         catch(StringIndexOutOfBoundsException e)
         {
-            if (((Student)user).getVisiTeacher() != null)
+            if (((Student)user).getVisiTeacher() != null && 
+                 (teacher_options.getSelectedItem() + "").equals("No Teacher"))
             {
                 ((Student)user).getVisiTeacher().remove_student((Student)user);
                 ((Student)user).deselect_teacher();   
@@ -1599,11 +1563,16 @@ public class FirstScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_checkStudent10ActionPerformed
 
     private void noMovementActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_noMovementActionPerformed
-        
-        //check if any assigned students are moving
-        //loop through assigned students
-        //if they are moving, have them deselect teacher
-        
+        PersonLinkedList llAssigned = ((Teacher)user).getAssignStudents();
+        for (int i = 0; i < llAssigned.size(); i++)
+        {
+            Student student = (Student) llAssigned.get(i);
+            if (student.getVisiTeacher() != null) //if student moving
+            {
+                student.deselect_teacher();
+            }
+        }
+        //need to also check to disallow future movements
     }//GEN-LAST:event_noMovementActionPerformed
 
     private void GoBackOptions1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GoBackOptions1ActionPerformed
@@ -1687,14 +1656,12 @@ public class FirstScreen extends javax.swing.JFrame {
     private javax.swing.JButton AdminButton;
     private javax.swing.JList<String> AssignedStudentLocations;
     private javax.swing.JLabel AssignedStudents;
-    private javax.swing.JFrame FirstScreenStudent;
     private javax.swing.JButton GoBackOptions;
     private javax.swing.JButton GoBackOptions1;
     private javax.swing.JButton GoHomeScreen;
     private javax.swing.JButton GoHomeScreenStudent;
     private javax.swing.JButton GoHomeScreenStudentPanel;
     private javax.swing.JButton GoHomeScreenTeacherMenu;
-    private javax.swing.JButton GoHomeScreenTeacherMenu1;
     private javax.swing.JButton GoHomeScreenTeacherPanel;
     private javax.swing.JList<String> ListReasons;
     private javax.swing.JLabel ProgramTitle;
@@ -1705,9 +1672,7 @@ public class FirstScreen extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> SelectTeacher;
     private javax.swing.JLabel SelectText;
     private javax.swing.JButton StudentButton;
-    private javax.swing.JButton StudentButton1;
     private javax.swing.JFileChooser StudentFileChooser;
-    private javax.swing.JFrame StudentFirstScreen;
     private javax.swing.JPanel StudentOpenCSV;
     private javax.swing.JPanel SuccessImport;
     private javax.swing.JLabel SuccessImportTxt;
@@ -1720,8 +1685,8 @@ public class FirstScreen extends javax.swing.JFrame {
     private javax.swing.JScrollPane assignedPresent;
     private javax.swing.JList<String> assignedStudentList;
     private javax.swing.JScrollPane assignedStudentScroll;
+    private javax.swing.JLabel capacityErrorLabel;
     private javax.swing.JLabel capacityFullNotice;
-    private javax.swing.JLabel capacityTooLargeLabel;
     private javax.swing.JCheckBox checkStudent1;
     private javax.swing.JCheckBox checkStudent10;
     private javax.swing.JCheckBox checkStudent2;
@@ -1736,6 +1701,8 @@ public class FirstScreen extends javax.swing.JFrame {
     private javax.swing.JLabel deselectionNotice;
     private javax.swing.JTextField enter_capacity;
     private javax.swing.JLabel explainMovingTxt;
+    private javax.swing.JLabel fileErrorStudent;
+    private javax.swing.JLabel fileErrorTeacher;
     private javax.swing.JPanel firstPanel;
     private javax.swing.JLabel guidingtxt1;
     private javax.swing.JButton importStudents;
@@ -1745,11 +1712,7 @@ public class FirstScreen extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTable jTable1;
     private javax.swing.JButton manageAssignedGP;
     private javax.swing.JCheckBox noMovement;
     private javax.swing.JLabel progTitle;
@@ -1778,4 +1741,4 @@ public class FirstScreen extends javax.swing.JFrame {
 }
 //TODO:
 //1. no movement teacher option (program button - almost opposite of deselect)
-//2. CSV work
+//2. CSV work - handling errors & checking for file aspects

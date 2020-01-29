@@ -2,8 +2,8 @@ import java.util.ArrayList;
 
 public class Schedule {
     
-    PersonLinkedList teachers; //contains teachers' IDs
-    PersonLinkedList students; //contains students' IDs
+    PersonLinkedList teachers = new PersonLinkedList(); //contains teachers' IDs
+    PersonLinkedList students = new PersonLinkedList(); //contains students' IDs
      
     public Schedule(PersonLinkedList teachers, PersonLinkedList students)
     {
