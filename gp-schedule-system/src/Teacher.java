@@ -10,6 +10,7 @@ public class Teacher extends Person{
     private PersonLinkedList visiStudents = new PersonLinkedList(); 
     private int vStudentCount = visiStudents.size();
     private PersonLinkedList assignStudents = new PersonLinkedList();
+    private boolean assignedAbleMove = true;
     
     public Teacher(int t_ID, String name)
     {
@@ -182,5 +183,13 @@ public class Teacher extends Person{
 
     public void setvStudentCount() {
         this.vStudentCount = visiStudents.size();
+    }
+
+    public boolean isAssignedAbleMove() {
+        return assignedAbleMove;
+    }
+
+    public void setAssignedAbleMove(boolean assignedAbleMove) {
+        this.assignedAbleMove = assignedAbleMove;
     }
 }

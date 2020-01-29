@@ -59,14 +59,7 @@ public class Schedule {
         }   
         return teach;
     }
-        
-//    public PersonLinkedList getStudentsForVList(int tID)
-//    {
-//        PersonLinkedList vstudents;
-//        
-//    }
-     
-
+    
     //setters and getters
     
     public PersonLinkedList getTeachers() {
