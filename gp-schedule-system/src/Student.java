@@ -31,12 +31,7 @@ public class Student extends Person {
     {
         return why_teacher;
     }
-    
-    public Teacher get_teacher()
-    {
-        return assignTeacher;
-    }
-    
+        
     public void set_teacher(Teacher t)
     {
         assignTeacher = t;
@@ -45,6 +40,15 @@ public class Student extends Person {
     public Teacher getVisiTeacher() {
         return visiTeacher;
     }
+    
+    public String getVisiTeacherOption() {
+        if (visiTeacher == null)
+        {
+            return "No Teacher";
+        }
+        return visiTeacher.getID() + ": " + visiTeacher.getName();
+    }
+
 
     public void setVisiTeacher(Teacher visiTeacher) {
         this.visiTeacher = visiTeacher;
@@ -78,6 +82,15 @@ public class Student extends Person {
     public Teacher getAssignTeacher() {
         return assignTeacher;
     }
+    
+    public String getAssignTeacherOption() {
+        if (assignTeacher == null)
+        {
+            return "No Teacher";
+        }
+        return assignTeacher.getID() + ": " + assignTeacher.getName();
+    }
+
 
     public void setAssignTeacher(Teacher assignTeacher) {
         this.assignTeacher = assignTeacher;

@@ -89,7 +89,7 @@ public class Schedule {
             }
             else
             {
-                return s.get_teacher().getID();
+                return s.getAssignTeacher().getID();
             }
         }
         return -1; 

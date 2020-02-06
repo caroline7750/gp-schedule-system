@@ -3,6 +3,8 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.*;
+
 
 public class Teacher extends Person{
     
@@ -22,6 +24,15 @@ public class Teacher extends Person{
     {
         super();
         capacity = 10;
+    }
+    
+    public boolean isFull()
+    {
+        if (vStudentCount >= capacity)
+        {
+            return true;
+        }
+        return false;
     }
 
     public int getCapacity() 
@@ -57,7 +68,7 @@ public class Teacher extends Person{
     
     public boolean add_student(Student student)
     {
-        if (vStudentCount < capacity)
+        if (!isFull() && student.getVisiTeacher().getID() != this.getID())
         {
             student.setVisiTeacher(this);
             this.visiStudents.add((Person) student);

@@ -37,6 +37,7 @@ public class FirstScreen extends javax.swing.JFrame {
         fileErrorStudent.setVisible(false);
         fileErrorTeacher.setVisible(false);
         noMovementNotice.setVisible(false);
+        selectedAlreadyNotice.setVisible(false);
         //panels' visibility
         
     }
@@ -74,6 +75,7 @@ public class FirstScreen extends javax.swing.JFrame {
         GoHomeScreenStudent = new javax.swing.JButton();
         deselectionNotice = new javax.swing.JLabel();
         noMovementNotice = new javax.swing.JLabel();
+        selectedAlreadyNotice = new javax.swing.JLabel();
         teacherPanel = new javax.swing.JPanel();
         SelectTeacher = new javax.swing.JComboBox<>();
         progTitle = new javax.swing.JLabel();
@@ -294,6 +296,8 @@ public class FirstScreen extends javax.swing.JFrame {
 
         noMovementNotice.setText("You cannot move - your teacher specified \"no movement\"");
 
+        selectedAlreadyNotice.setText("You have already selected that teacher");
+
         javax.swing.GroupLayout studentMenuLayout = new javax.swing.GroupLayout(studentMenu);
         studentMenu.setLayout(studentMenuLayout);
         studentMenuLayout.setHorizontalGroup(
@@ -330,7 +334,9 @@ public class FirstScreen extends javax.swing.JFrame {
                                 .addComponent(capacityFullNotice)))
                         .addGroup(studentMenuLayout.createSequentialGroup()
                             .addGap(25, 25, 25)
-                            .addComponent(deselectionNotice))))
+                            .addGroup(studentMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(selectedAlreadyNotice)
+                                .addComponent(deselectionNotice)))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(studentMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(studentMenuLayout.createSequentialGroup()
@@ -361,10 +367,11 @@ public class FirstScreen extends javax.swing.JFrame {
                 .addComponent(noMovementNotice)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(GoHomeScreenStudent)
-                .addGap(14, 14, 14))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(selectedAlreadyNotice))
             .addGroup(studentMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, studentMenuLayout.createSequentialGroup()
-                    .addContainerGap(185, Short.MAX_VALUE)
+                    .addContainerGap(193, Short.MAX_VALUE)
                     .addComponent(successSelectNotice)
                     .addGap(116, 116, 116)))
         );
@@ -1087,16 +1094,23 @@ public class FirstScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_SelectTeacherActionPerformed
 
     private void SelectStudentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SelectStudentActionPerformed
-        capacityFullNotice.setVisible(false);
-        deselectionNotice.setVisible(false);
-        studentPanel.setVisible(false);
-        //need to test if student able to move (or if GP frozen)
-        studentMenu.setVisible(true);
         if (s.getStudents()!= null)
         {
+            studentPanel.setVisible(false);
+            //need to test if student able to move (or if GP frozen)
+            studentMenu.setVisible(true);
             String selectedStr = "" + SelectStudent.getSelectedItem();
             String idParse = selectedStr.substring(0,selectedStr.indexOf(":"));
             user = s.getStudentFromID(Integer.parseInt(idParse));
+            System.out.println(user);
+            System.out.println(((Student)(user)).getVisiTeacher().getName());
+            if (((Student)(user)).getVisiTeacher().getName() == null)
+            {
+            capacityFullNotice.setVisible(false);
+            deselectionNotice.setVisible(false);
+            selectedAlreadyNotice.setVisible(false);
+            }
+
         }
         if (s.getStudents() != null && s.getTeachers() != null)
         {
@@ -1111,7 +1125,7 @@ public class FirstScreen extends javax.swing.JFrame {
             {
                 String selectedStr = "" + teachers[i];
                 String idParse = selectedStr.substring(0,selectedStr.indexOf(":"));
-                if (Integer.parseInt(idParse) != s.getStudentFromID(user.getID()).get_teacher().getID()
+                if (Integer.parseInt(idParse) != s.getStudentFromID(user.getID()).getAssignTeacher().getID()
                 && unique_ID(Integer.parseInt(idParse), teacher_options)) 
                 {
                     teacher_options.insertItemAt(teachers[i], 0); //won't auto-select
@@ -1174,7 +1188,6 @@ public class FirstScreen extends javax.swing.JFrame {
     }
     
     private void enter_capacityActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enter_capacityActionPerformed
-
         try
         {
             int capacity = Integer.parseInt(enter_capacity.getText());
@@ -1192,6 +1205,7 @@ public class FirstScreen extends javax.swing.JFrame {
                 {
                     ((Student)(vStudents.get(i))).deselect_teacher();
                      vStudents.remove(i);
+                     teacher_options.setSelectedItem("No Teacher");
                 }
                 ((Teacher)user).setVisiStudents(vStudents);
                 ((Teacher)user).setvStudentCount();
@@ -1454,55 +1468,59 @@ public class FirstScreen extends javax.swing.JFrame {
             String idParse = item.substring(0, item.indexOf(":"));
             enteredIDs.add(Integer.parseInt(idParse));
         }
-        if(enteredIDs.contains(Integer.parseInt(ID + "")))
-        {
-            return false;
-        }
-        return true;
+        return !enteredIDs.contains(Integer.parseInt(ID + ""));
     }
             
     private void teacher_optionsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_teacher_optionsActionPerformed
         successSelectNotice.setVisible(false);
-        successSelectNotice.setVisible(false);
+        noMovementNotice.setVisible(false);
         deselectionNotice.setVisible(false);
+        capacityFullNotice.setVisible(false);
+        selectedAlreadyNotice.setVisible(false);
+    
         try
-        {
-            why_teacher_txt.setText("");
-            String selectedStr = "" + teacher_options.getSelectedItem();
-            String idParse = selectedStr.substring(0,selectedStr.indexOf(":"));
-            int visiTeacherID = Integer.parseInt(idParse);
-            Teacher tSel = s.getTeacherFromID(visiTeacherID);
-            boolean ableMoving = ((Student)user).getAssignTeacher().isAssignedAbleMove();
-            if (tSel.add_student((Student) user) && ableMoving)
             {
-                successSelectNotice.setVisible(true);
-            }
-            else
-            {
-                successSelectNotice.setVisible(false);
-                if (!ableMoving)
+                why_teacher_txt.setText("");
+                String selectedStr = "" + teacher_options.getSelectedItem();
+                String idParse = selectedStr.substring(0,selectedStr.indexOf(":"));
+                int visiTeacherID = Integer.parseInt(idParse);
+                Teacher tSel = s.getTeacherFromID(visiTeacherID);
+                boolean ableMoving = ((Student)user).getAssignTeacher().isAssignedAbleMove();
+                if (tSel.add_student((Student) user) && ableMoving)
                 {
-                    noMovementNotice.setVisible(true);
+                    successSelectNotice.setVisible(true);
                 }
                 else
                 {
-                    capacityFullNotice.setVisible(true);
+                    teacher_options.setSelectedItem(((Student)user).getAssignTeacherOption()); //need to make it student's teacher
+                    successSelectNotice.setVisible(false);
+                    if (!ableMoving)
+                    {
+                        noMovementNotice.setVisible(true);
+                    }
+                    else if (tSel.isFull())
+                    {
+                        capacityFullNotice.setVisible(true);
+                    }
+                    else
+                    {
+                        selectedAlreadyNotice.setVisible(true);
+                    }
                 }
             }
-        }
-        catch(StringIndexOutOfBoundsException e)
-        {
-            if (((Student)user).getVisiTeacher() != null && 
-                 (teacher_options.getSelectedItem() + "").equals("No Teacher"))
+            catch(StringIndexOutOfBoundsException e)
             {
-                ((Student)user).getVisiTeacher().remove_student((Student)user);
-                ((Student)user).deselect_teacher();   
-                successSelectNotice.setVisible(false);
-                deselectionNotice.setVisible(true);
-                //update for assigned GP teacher - figure out what updating
+                if (((Student)user).getVisiTeacher() != null && 
+                     (teacher_options.getSelectedItem() + "").equals("No Teacher"))
+                {
+                    ((Student)user).getVisiTeacher().remove_student((Student)user);
+                    ((Student)user).deselect_teacher();   
+                    successSelectNotice.setVisible(false);
+                    deselectionNotice.setVisible(true);
+                    //update for assigned GP teacher - figure out what updating
 
+                }
             }
-        }
     }//GEN-LAST:event_teacher_optionsActionPerformed
 
     private void GoHomeScreenStudentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GoHomeScreenStudentActionPerformed
@@ -1603,7 +1621,6 @@ public class FirstScreen extends javax.swing.JFrame {
                 {
                     (student.getVisiTeacher()).remove_student(student);
                     student.deselect_teacher();
-                    
                 }
             }
         }
@@ -1757,6 +1774,7 @@ public class FirstScreen extends javax.swing.JFrame {
     private javax.swing.JButton seeVisibleGP;
     private javax.swing.JLabel selectText;
     private javax.swing.JLabel selectTxt;
+    private javax.swing.JLabel selectedAlreadyNotice;
     private javax.swing.JLabel selectingAdminOption;
     private javax.swing.JLabel set_capacity_txt;
     private javax.swing.JPanel studentMenu;
@@ -1775,5 +1793,7 @@ public class FirstScreen extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 }
 //TODO:
-//1. CSV work - handling errors & checking for file aspects - just tesing now!!
-//2. Have no movement option display "no teacher" as selected item
+//CSV work - handling errors & checking for file aspects - just tesing now!!
+//FIX ERROR - selects student twice!!
+//when done refactor code for good var names & comment functions
+
