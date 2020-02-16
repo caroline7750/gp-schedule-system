@@ -11,7 +11,7 @@ abstract class Person {
     
     public Person()
     {
-        
+        this.ID = -1;
     }
     
     public String getName()

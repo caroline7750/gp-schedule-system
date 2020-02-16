@@ -10,18 +10,15 @@ public class Student extends Person {
     {
         super(name, ID);
         this.assignTeachID = assignTeachID;
-    
-        
-        //need to search for ID and assign it to teacher
-        //pre-check that ID existing (do this in file processing)
     }
-    
     
     public Student()
     {
         super();
     }
 
+    //set assignTeach based on ID
+    
     public void setWhy_teacher(String why_teacher) 
     {
         this.why_teacher = why_teacher;
@@ -42,7 +39,7 @@ public class Student extends Person {
     }
     
     public String getVisiTeacherOption() {
-        if (visiTeacher == null)
+        if (visiTeacher.getID() == -1)
         {
             return "No Teacher";
         }
@@ -74,7 +71,7 @@ public class Student extends Person {
     
     public void deselect_teacher()
     {
-        visiTeacher = null;
+        visiTeacher = new Teacher();
         why_teacher = "";
         setVerified(false);
     }
@@ -84,7 +81,7 @@ public class Student extends Person {
     }
     
     public String getAssignTeacherOption() {
-        if (assignTeacher == null)
+        if (assignTeacher.getID() == -1)
         {
             return "No Teacher";
         }

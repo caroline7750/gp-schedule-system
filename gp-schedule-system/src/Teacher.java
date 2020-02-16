@@ -1,4 +1,3 @@
-import com.opencsv.CSVReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -8,7 +7,7 @@ import java.util.*;
 
 public class Teacher extends Person{
     
-    private int capacity;
+    private int capacity = 10; //default capacity
     private PersonLinkedList visiStudents = new PersonLinkedList(); 
     private int vStudentCount = visiStudents.size();
     private PersonLinkedList assignStudents = new PersonLinkedList();
@@ -17,13 +16,11 @@ public class Teacher extends Person{
     public Teacher(int t_ID, String name)
     {
         super(name, t_ID);
-        capacity = 10; //default capacity
     }
     
     public Teacher()
     {
         super();
-        capacity = 10;
     }
     
     public boolean isFull()
@@ -106,7 +103,7 @@ public class Teacher extends Person{
             try
             {
                 String loc = ((Student)(assignStudents.get(i))).getVisiTeacher().getID() + "";
-                if (loc.equals("0"))
+                if (loc.equals("-1"))
                 {
                     locations[i] = "Not Moving";
                 }
@@ -131,10 +128,10 @@ public class Teacher extends Person{
             try
             {
                 String loc = ((Student)(assignStudents.get(i))).getVisiTeacher().getID() + "";
-                if (loc.equals("0"))            {
+                if (loc.equals("-1"))            {
                     verify[i] = "n/a";
                 }
-                if (((Student)(assignStudents.get(i))).isVerified())
+                else if (((Student)(assignStudents.get(i))).isVerified())
                 {
                     verify[i] = "Yes";
                 }
@@ -169,7 +166,7 @@ public class Teacher extends Person{
             if (visiStudents.get(i).equals(student))
             {
                 visiStudents.remove(i);
-                student.setVisiTeacher(null);
+                student.setVisiTeacher(new Teacher());
                 setvStudentCount();
             }
         }

@@ -1,9 +1,7 @@
-import java.util.ArrayList;
-
 public class Schedule {
     
-    PersonLinkedList teachers = new PersonLinkedList(); //contains teachers' IDs
-    PersonLinkedList students = new PersonLinkedList(); //contains students' IDs
+    PersonLinkedList teachers = new PersonLinkedList(); 
+    PersonLinkedList students = new PersonLinkedList(); 
      
     public Schedule(PersonLinkedList teachers, PersonLinkedList students)
     {
@@ -83,7 +81,7 @@ public class Schedule {
         for (int i = 0; i<students.getSize(); i++)
         {
             Student s = (Student) students.get(i);
-            if (s.getVisiTeacher() != null)
+            if (s.getVisiTeacher().getID() != -1)
             {
                 return s.getVisiTeacher().getID();
             }

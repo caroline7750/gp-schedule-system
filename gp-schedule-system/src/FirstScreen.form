@@ -390,6 +390,7 @@
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="guidingtxt1" min="-2" max="-2" attributes="0"/>
                                   <Component id="capacityFullNotice" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="whyTeacherEmptyNotice" alignment="0" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
@@ -429,7 +430,9 @@
                       <Component id="why_teacher_txt" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="explainMovingTxt" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
+                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                  <Component id="whyTeacherEmptyNotice" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
                   <Component id="capacityFullNotice" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Component id="deselectionNotice" min="-2" max="-2" attributes="0"/>
@@ -522,6 +525,11 @@
         <Component class="javax.swing.JLabel" name="selectedAlreadyNotice">
           <Properties>
             <Property name="text" type="java.lang.String" value="You have already selected that teacher"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="whyTeacherEmptyNotice">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Please enter why you are visiting that teacher"/>
           </Properties>
         </Component>
       </SubComponents>

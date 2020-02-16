@@ -38,8 +38,8 @@ public class FirstScreen extends javax.swing.JFrame {
         fileErrorTeacher.setVisible(false);
         noMovementNotice.setVisible(false);
         selectedAlreadyNotice.setVisible(false);
+        whyTeacherEmptyNotice.setVisible(false);
         //panels' visibility
-        
     }
 
     /**
@@ -76,6 +76,7 @@ public class FirstScreen extends javax.swing.JFrame {
         deselectionNotice = new javax.swing.JLabel();
         noMovementNotice = new javax.swing.JLabel();
         selectedAlreadyNotice = new javax.swing.JLabel();
+        whyTeacherEmptyNotice = new javax.swing.JLabel();
         teacherPanel = new javax.swing.JPanel();
         SelectTeacher = new javax.swing.JComboBox<>();
         progTitle = new javax.swing.JLabel();
@@ -298,6 +299,8 @@ public class FirstScreen extends javax.swing.JFrame {
 
         selectedAlreadyNotice.setText("You have already selected that teacher");
 
+        whyTeacherEmptyNotice.setText("Please enter why you are visiting that teacher");
+
         javax.swing.GroupLayout studentMenuLayout = new javax.swing.GroupLayout(studentMenu);
         studentMenu.setLayout(studentMenuLayout);
         studentMenuLayout.setHorizontalGroup(
@@ -331,7 +334,8 @@ public class FirstScreen extends javax.swing.JFrame {
                             .addGap(78, 78, 78)
                             .addGroup(studentMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(guidingtxt1)
-                                .addComponent(capacityFullNotice)))
+                                .addComponent(capacityFullNotice)
+                                .addComponent(whyTeacherEmptyNotice)))
                         .addGroup(studentMenuLayout.createSequentialGroup()
                             .addGap(25, 25, 25)
                             .addGroup(studentMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -359,7 +363,9 @@ public class FirstScreen extends javax.swing.JFrame {
                 .addGroup(studentMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(why_teacher_txt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(explainMovingTxt))
-                .addGap(44, 44, 44)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(whyTeacherEmptyNotice)
+                .addGap(16, 16, 16)
                 .addComponent(capacityFullNotice)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(deselectionNotice)
@@ -1102,9 +1108,7 @@ public class FirstScreen extends javax.swing.JFrame {
             String selectedStr = "" + SelectStudent.getSelectedItem();
             String idParse = selectedStr.substring(0,selectedStr.indexOf(":"));
             user = s.getStudentFromID(Integer.parseInt(idParse));
-            System.out.println(user);
-            System.out.println(((Student)(user)).getVisiTeacher().getName());
-            if (((Student)(user)).getVisiTeacher().getName() == null)
+            if (((Student)(user)).getVisiTeacher().getID() == -1)
             {
             capacityFullNotice.setVisible(false);
             deselectionNotice.setVisible(false);
@@ -1135,12 +1139,12 @@ public class FirstScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_SelectStudentActionPerformed
 
     private void why_teacher_txtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_why_teacher_txtActionPerformed
-        if (successSelectNotice.isVisible())
+        if (successSelectNotice.isVisible() && !why_teacher_txt.getText().equals(""))
         {
             String text = why_teacher_txt.getText();
             ((Student) user).setWhy_teacher(text);
-            successSelectNotice.setText("You have selected " + ((Student)user).getVisiTeacher().getName() + " " + ((Student)user).getVisiTeacher().getID() + " because " + text);
-            why_teacher_txt.setText("");
+            successSelectNotice.setText("You have selected " + ((Student)user).getVisiTeacher().getName() + " " + ((Student)user).getVisiTeacher().getID() + " because " + text); 
+            whyTeacherEmptyNotice.setVisible(false);
         }
     }//GEN-LAST:event_why_teacher_txtActionPerformed
 
@@ -1179,6 +1183,17 @@ public class FirstScreen extends javax.swing.JFrame {
             try
             {
                 checkboxes[i].setText(((Teacher)user).getVisiStudentsForList()[i]);
+                String selectedStr = "" + ((Teacher)user).getVisiStudentsForList()[i];
+                String idParse = selectedStr.substring(0,selectedStr.indexOf(":"));
+                if (s.getStudentFromID(Integer.parseInt(idParse)).isVerified() && !checkboxes[i].isSelected())
+                {
+                    checkboxes[i].setSelected(true);
+                }
+                else if (!s.getStudentFromID(Integer.parseInt(idParse)).isVerified() && checkboxes[i].isSelected())
+                {
+                    checkboxes[i].setSelected(false);
+                }
+                
             }
             catch (ArrayIndexOutOfBoundsException e)
             {
@@ -1205,7 +1220,7 @@ public class FirstScreen extends javax.swing.JFrame {
                 {
                     ((Student)(vStudents.get(i))).deselect_teacher();
                      vStudents.remove(i);
-                     teacher_options.setSelectedItem("No Teacher");
+                     //teacher_options.setSelectedItem("No Teacher");
                 }
                 ((Teacher)user).setVisiStudents(vStudents);
                 ((Teacher)user).setvStudentCount();
@@ -1231,7 +1246,7 @@ public class FirstScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_TeacherButtonActionPerformed
 
     private void importStudentsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_importStudentsActionPerformed
-        if (s.getTeachers() == null)
+        if (s.getTeachers().get(0) == null)
         {
             warningLabel.setVisible(true);
         }
@@ -1268,7 +1283,6 @@ public class FirstScreen extends javax.swing.JFrame {
 
                 PersonLinkedList students = new PersonLinkedList();
          
-                //2. needs to check if teacherID exists (check set), use searching, if not print warning
 
                 try {
                     br = new BufferedReader(new FileReader(csvFile)); //creating reader
@@ -1278,8 +1292,10 @@ public class FirstScreen extends javax.swing.JFrame {
                         String[] student = line.split(cvsSplitBy); //two things, name & ID, idx 0 = name, idx 1 = ID
                         int setSize = sIdSet.size();
                         sIdSet.add(Integer.parseInt(student[1]));
+                        //2. needs to check if teacherID exists (check set), use searching, if not print warning
                         if (tIdSet.contains(Integer.parseInt(student[2])))
                         {
+
                             if (setSize == sIdSet.size() - 1) //checks to make sure all elems unique
                             {
                                 students.add(new Student(Integer.parseInt(student[1]), student[0], Integer.parseInt(student[2])));
@@ -1440,7 +1456,15 @@ public class FirstScreen extends javax.swing.JFrame {
         {
             assignedStudentList.setListData(((Teacher)user).getAssignedStudentsForList());
             AssignedStudentLocations.setListData(((Teacher)user).getAssignedStudentsLocations());
-            VerifiedList.setListData(((Teacher)user).getAssignedStudentsVerifications());
+            VerifiedList.setListData(((Teacher)user).getAssignedStudentsVerifications());    
+            if (!noMovement.isSelected() && !((Teacher)user).isAssignedAbleMove())
+            {
+                noMovement.setSelected(true);
+            }
+            else if (noMovement.isSelected() && ((Teacher)user).isAssignedAbleMove())
+            {
+                noMovement.setSelected(false);
+            }
         }   
     }
     private void manageAssignedGPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_manageAssignedGPActionPerformed
@@ -1473,20 +1497,24 @@ public class FirstScreen extends javax.swing.JFrame {
             
     private void teacher_optionsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_teacher_optionsActionPerformed
         successSelectNotice.setVisible(false);
+        successSelectNotice.setText("You are able to visit that teacher");
         noMovementNotice.setVisible(false);
         deselectionNotice.setVisible(false);
         capacityFullNotice.setVisible(false);
         selectedAlreadyNotice.setVisible(false);
-    
+        whyTeacherEmptyNotice.setVisible(false);
+        if (((Student)user).getVisiTeacherOption().equals("No Teacher"))
+        {
+            why_teacher_txt.setText("");
+        }
         try
             {
-                why_teacher_txt.setText("");
                 String selectedStr = "" + teacher_options.getSelectedItem();
                 String idParse = selectedStr.substring(0,selectedStr.indexOf(":"));
                 int visiTeacherID = Integer.parseInt(idParse);
                 Teacher tSel = s.getTeacherFromID(visiTeacherID);
                 boolean ableMoving = ((Student)user).getAssignTeacher().isAssignedAbleMove();
-                if (tSel.add_student((Student) user) && ableMoving)
+                if (ableMoving && tSel.add_student((Student) user))
                 {
                     successSelectNotice.setVisible(true);
                 }
@@ -1510,23 +1538,36 @@ public class FirstScreen extends javax.swing.JFrame {
             }
             catch(StringIndexOutOfBoundsException e)
             {
-                if (((Student)user).getVisiTeacher() != null && 
-                     (teacher_options.getSelectedItem() + "").equals("No Teacher"))
+                try
                 {
+                if (((Student)user).getVisiTeacher().getID() != -1 && 
+                     (teacher_options.getSelectedItem() + "").equals("No Teacher"))
+                    {
                     ((Student)user).getVisiTeacher().remove_student((Student)user);
                     ((Student)user).deselect_teacher();   
                     successSelectNotice.setVisible(false);
                     deselectionNotice.setVisible(true);
-                    //update for assigned GP teacher - figure out what updating
-
+                    why_teacher_txt.setText("");
+                    }
+                }
+                catch (ClassCastException ex)
+                {
+                    
                 }
             }
     }//GEN-LAST:event_teacher_optionsActionPerformed
 
     private void GoHomeScreenStudentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GoHomeScreenStudentActionPerformed
-        successSelectNotice.setText("You are able to visit that teacher"); //making it go back to normal
-        studentMenu.setVisible(false);
-        firstPanel.setVisible(true);
+        if (why_teacher_txt.getText().equals("") && !((Student)user).getVisiTeacherOption().equals("No Teacher"))
+        {
+            whyTeacherEmptyNotice.setVisible(true);
+        }
+        else
+        {
+            //successSelectNotice.setText("You are able to visit that teacher"); //making it go back to normal
+            studentMenu.setVisible(false);
+            firstPanel.setVisible(true);
+        }
     }//GEN-LAST:event_GoHomeScreenStudentActionPerformed
 
     private void GoHomeScreenStudentPanelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GoHomeScreenStudentPanelActionPerformed
@@ -1552,78 +1593,132 @@ public class FirstScreen extends javax.swing.JFrame {
     private void checkStudent3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkStudent3ActionPerformed
         String selectedStr = "" + checkStudent3.getText();
         String idParse = selectedStr.substring(0,selectedStr.indexOf(":"));
-        s.getStudentFromID(Integer.parseInt(idParse)).setVerified(true);
+        if (checkStudent3.isSelected())
+            s.getStudentFromID(Integer.parseInt(idParse)).setVerified(true);
+        else
+        {
+            s.getStudentFromID(Integer.parseInt(idParse)).setVerified(false);
+        }
     }//GEN-LAST:event_checkStudent3ActionPerformed
 
     private void checkStudent2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkStudent2ActionPerformed
         String selectedStr = "" + checkStudent2.getText();
         String idParse = selectedStr.substring(0,selectedStr.indexOf(":"));
-        s.getStudentFromID(Integer.parseInt(idParse)).setVerified(true);
+        if (checkStudent2.isSelected())
+            s.getStudentFromID(Integer.parseInt(idParse)).setVerified(true);
+        else
+        {
+            s.getStudentFromID(Integer.parseInt(idParse)).setVerified(false);
+        }
     }//GEN-LAST:event_checkStudent2ActionPerformed
 
     private void checkStudent1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkStudent1ActionPerformed
         String selectedStr = "" + checkStudent1.getText();
         String idParse = selectedStr.substring(0,selectedStr.indexOf(":"));
-        s.getStudentFromID(Integer.parseInt(idParse)).setVerified(true);
+        if (checkStudent1.isSelected())
+            s.getStudentFromID(Integer.parseInt(idParse)).setVerified(true);
+        else
+        {
+            s.getStudentFromID(Integer.parseInt(idParse)).setVerified(false);
+        }
     }//GEN-LAST:event_checkStudent1ActionPerformed
 
     private void checkStudent4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkStudent4ActionPerformed
         String selectedStr = "" + checkStudent4.getText();
         String idParse = selectedStr.substring(0,selectedStr.indexOf(":"));
-        s.getStudentFromID(Integer.parseInt(idParse)).setVerified(true);
+        if (checkStudent4.isSelected())
+            s.getStudentFromID(Integer.parseInt(idParse)).setVerified(true);
+        else
+        {
+            s.getStudentFromID(Integer.parseInt(idParse)).setVerified(false);
+        }
     }//GEN-LAST:event_checkStudent4ActionPerformed
 
     private void checkStudent5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkStudent5ActionPerformed
         String selectedStr = "" + checkStudent5.getText();
         String idParse = selectedStr.substring(0,selectedStr.indexOf(":"));
-        s.getStudentFromID(Integer.parseInt(idParse)).setVerified(true);
+        if (checkStudent5.isSelected())
+            s.getStudentFromID(Integer.parseInt(idParse)).setVerified(true);
+        else
+        {
+            s.getStudentFromID(Integer.parseInt(idParse)).setVerified(false);
+        }
     }//GEN-LAST:event_checkStudent5ActionPerformed
 
     private void checkStudent6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkStudent6ActionPerformed
         String selectedStr = "" + checkStudent6.getText();
         String idParse = selectedStr.substring(0,selectedStr.indexOf(":"));
-        s.getStudentFromID(Integer.parseInt(idParse)).setVerified(true);
+        if (checkStudent6.isSelected())
+            s.getStudentFromID(Integer.parseInt(idParse)).setVerified(true);
+        else
+        {
+            s.getStudentFromID(Integer.parseInt(idParse)).setVerified(false);
+        }
     }//GEN-LAST:event_checkStudent6ActionPerformed
 
     private void checkStudent7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkStudent7ActionPerformed
         String selectedStr = "" + checkStudent7.getText();
         String idParse = selectedStr.substring(0,selectedStr.indexOf(":"));
-        s.getStudentFromID(Integer.parseInt(idParse)).setVerified(true);
+        if (checkStudent7.isSelected())
+            s.getStudentFromID(Integer.parseInt(idParse)).setVerified(true);
+        else
+        {
+            s.getStudentFromID(Integer.parseInt(idParse)).setVerified(false);
+        }
     }//GEN-LAST:event_checkStudent7ActionPerformed
 
     private void checkStudent8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkStudent8ActionPerformed
         String selectedStr = "" + checkStudent8.getText();
         String idParse = selectedStr.substring(0,selectedStr.indexOf(":"));
-        s.getStudentFromID(Integer.parseInt(idParse)).setVerified(true);
+        if (checkStudent8.isSelected())
+            s.getStudentFromID(Integer.parseInt(idParse)).setVerified(true);
+        else
+        {
+            s.getStudentFromID(Integer.parseInt(idParse)).setVerified(false);
+        }
     }//GEN-LAST:event_checkStudent8ActionPerformed
 
     private void checkStudent9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkStudent9ActionPerformed
         String selectedStr = "" + checkStudent9.getText();
         String idParse = selectedStr.substring(0,selectedStr.indexOf(":"));
-        s.getStudentFromID(Integer.parseInt(idParse)).setVerified(true);
+        if (checkStudent9.isSelected())
+            s.getStudentFromID(Integer.parseInt(idParse)).setVerified(true);
+        else
+        {
+            s.getStudentFromID(Integer.parseInt(idParse)).setVerified(false);
+        }
     }//GEN-LAST:event_checkStudent9ActionPerformed
 
     private void checkStudent10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkStudent10ActionPerformed
         String selectedStr = "" + checkStudent10.getText();
         String idParse = selectedStr.substring(0,selectedStr.indexOf(":"));
-        s.getStudentFromID(Integer.parseInt(idParse)).setVerified(true);
+        if (checkStudent10.isSelected())
+        {
+            s.getStudentFromID(Integer.parseInt(idParse)).setVerified(true);
+        }
+        else
+        {
+            s.getStudentFromID(Integer.parseInt(idParse)).setVerified(false);
+        }
     }//GEN-LAST:event_checkStudent10ActionPerformed
 
     private void noMovementActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_noMovementActionPerformed
         PersonLinkedList llAssigned = ((Teacher)user).getAssignStudents();
         ((Teacher)user).setAssignedAbleMove(!((Teacher)user).isAssignedAbleMove());
-        if (!((Teacher)user).isAssignedAbleMove())
+        if (!noMovement.isSelected() && !((Teacher)user).isAssignedAbleMove()
+            || noMovement.isSelected() && ((Teacher)user).isAssignedAbleMove())
         {
             for (int i = 0; i < llAssigned.size(); i++)
             {
                 Student student = (Student) llAssigned.get(i);
-                if (student.getVisiTeacher() != null) //if student moving
+                if (student.getVisiTeacher().getID() != -1) //if student moving
                 {
                     (student.getVisiTeacher()).remove_student(student);
                     student.deselect_teacher();
                 }
             }
         }
+        updateAssignedStudents();
     }//GEN-LAST:event_noMovementActionPerformed
 
     private void GoBackOptions1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GoBackOptions1ActionPerformed
@@ -1697,7 +1792,6 @@ public class FirstScreen extends javax.swing.JFrame {
     }
     Set<Integer> tIdSet = new HashSet<Integer>(); //created set
     Set<Integer> sIdSet = new HashSet<Integer>(); //created set
-    
     Set<Integer> enteredIDs = new HashSet<Integer>(); //created set for unique_ID func
     
     
@@ -1789,11 +1883,11 @@ public class FirstScreen extends javax.swing.JFrame {
     private javax.swing.JList<String> visiStudentList;
     private javax.swing.JScrollPane visiStudentScroll;
     private javax.swing.JLabel warningLabel;
+    private javax.swing.JLabel whyTeacherEmptyNotice;
     private javax.swing.JTextField why_teacher_txt;
     // End of variables declaration//GEN-END:variables
 }
 //TODO:
-//CSV work - handling errors & checking for file aspects - just tesing now!!
-//FIX ERROR - selects student twice!!
+//CSV work - handling errors & checking for file aspects - just testing now!!
 //when done refactor code for good var names & comment functions
 
