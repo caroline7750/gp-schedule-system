@@ -1148,7 +1148,7 @@ public class FirstScreen extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_why_teacher_txtActionPerformed
 
-    private void updateVisiStudents()
+    private void updateVisiStudents(Teacher t)
     {
         javax.swing.JCheckBox[] checkboxes = {checkStudent1,checkStudent2, checkStudent3, checkStudent4, 
                                checkStudent5, checkStudent6, checkStudent7, checkStudent8, 
@@ -1157,12 +1157,12 @@ public class FirstScreen extends javax.swing.JFrame {
         {
             checkboxes[i].setVisible(false);
         }
-        if (s.getTeachers() != null && s.getStudents() != null && ((Teacher)user).getvStudentCount()!= 0)
+        if (s.getTeachers() != null && s.getStudents() != null && t.getvStudentCount()!= 0)
         {
-            visiStudentList.setListData(((Teacher)user).getVisiStudentsForList());
+            visiStudentList.setListData(t.getVisiStudentsForList());
             try
             {
-                ListReasons.setListData(((Teacher)user).getReasonsForList());
+                ListReasons.setListData(t.getReasonsForList());
             }
             catch (NullPointerException e)
             {
@@ -1170,20 +1170,20 @@ public class FirstScreen extends javax.swing.JFrame {
                ListReasons.setListData(sarr); 
             }
         }
-        else if (((Teacher)user).getvStudentCount()== 0)
+        else if (t.getvStudentCount()== 0)
         {
             String[] sarr = {" "};
             visiStudentList.setListData(sarr);
             ListReasons.setListData(sarr); 
         }
         
-        for (int i = 0; i < ((Teacher)user).getvStudentCount(); i++)
+        for (int i = 0; i < t.getvStudentCount(); i++)
         {
             checkboxes[i].setVisible(true);
             try
             {
-                checkboxes[i].setText(((Teacher)user).getVisiStudentsForList()[i]);
-                String selectedStr = "" + ((Teacher)user).getVisiStudentsForList()[i];
+                checkboxes[i].setText(t.getVisiStudentsForList()[i]);
+                String selectedStr = "" + t.getVisiStudentsForList()[i];
                 String idParse = selectedStr.substring(0,selectedStr.indexOf(":"));
                 if (s.getStudentFromID(Integer.parseInt(idParse)).isVerified() && !checkboxes[i].isSelected())
                 {
@@ -1224,7 +1224,7 @@ public class FirstScreen extends javax.swing.JFrame {
                 }
                 ((Teacher)user).setVisiStudents(vStudents);
                 ((Teacher)user).setvStudentCount();
-                updateVisiStudents();
+                updateVisiStudents((Teacher)user);
             }
         }
         catch (NumberFormatException e)
@@ -1237,7 +1237,7 @@ public class FirstScreen extends javax.swing.JFrame {
         teacherMenu.setVisible(false);
         enter_capacity.setText("");
         SeeVisitingGPStudents.setVisible(true);
-        updateVisiStudents();
+        updateVisiStudents((Teacher)user);
     }//GEN-LAST:event_seeVisibleGPActionPerformed
 
     private void TeacherButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TeacherButtonActionPerformed
@@ -1264,6 +1264,7 @@ public class FirstScreen extends javax.swing.JFrame {
 
     private void StudentFileChooserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_StudentFileChooserActionPerformed
         fileErrorStudent.setVisible(false);
+        fileErrorTeacher.setVisible(false);
         if(evt.getActionCommand().equals("CancelSelection"))
         {
             adminPanel.setVisible(true);
@@ -1345,7 +1346,10 @@ public class FirstScreen extends javax.swing.JFrame {
                         }
                     }
                 }
-                s.setStudents(students);
+                if (students.size() > 0)
+                {
+                    s.setStudents(students);    
+                }
                 for (int i = 0; i < students.size(); i ++)
                 {
                     Student student = (Student) students.get(i);
@@ -1369,7 +1373,8 @@ public class FirstScreen extends javax.swing.JFrame {
     }//GEN-LAST:event_StudentFileChooserActionPerformed
 
     private void TeacherFileChooserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TeacherFileChooserActionPerformed
-        
+        fileErrorStudent.setVisible(false);
+        fileErrorTeacher.setVisible(false);
         if(evt.getActionCommand().equals("CancelSelection"))
         {
             adminPanel.setVisible(true);
@@ -1403,11 +1408,14 @@ public class FirstScreen extends javax.swing.JFrame {
                         }
                         else
                         {
-                            fileErrorStudent.setText("Repeat teachers found in file.");
-                            fileErrorStudent.setVisible(true);
+                            fileErrorTeacher.setText("Repeat teachers found in file.");
+                            fileErrorTeacher.setVisible(true);
                         }
                     TeacherOpenCSV.setVisible(false);
-                    s.setTeachers(teachers); //same
+                    if (teachers.size() > 0)
+                    {
+                        s.setTeachers(teachers); //same
+                    }
                     warningLabel.setVisible(false);
                     updateTeacherComboBox(); //why is this repeated
                     teacherMenu.setVisible(false); 
@@ -1705,16 +1713,20 @@ public class FirstScreen extends javax.swing.JFrame {
     private void noMovementActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_noMovementActionPerformed
         PersonLinkedList llAssigned = ((Teacher)user).getAssignStudents();
         ((Teacher)user).setAssignedAbleMove(!((Teacher)user).isAssignedAbleMove());
-        if (!noMovement.isSelected() && !((Teacher)user).isAssignedAbleMove()
-            || noMovement.isSelected() && ((Teacher)user).isAssignedAbleMove())
+//        System.out.println(noMovement.isSelected());
+//        System.out.println(((Teacher)user).isAssignedAbleMove());
+        if ((noMovement.isSelected() && !((Teacher)user).isAssignedAbleMove())
+            || (!noMovement.isSelected() && ((Teacher)user).isAssignedAbleMove()))
         {
             for (int i = 0; i < llAssigned.size(); i++)
             {
                 Student student = (Student) llAssigned.get(i);
                 if (student.getVisiTeacher().getID() != -1) //if student moving
                 {
-                    (student.getVisiTeacher()).remove_student(student);
+                    Teacher t = student.getVisiTeacher();
+                    t.remove_student(student);
                     student.deselect_teacher();
+                    updateVisiStudents(t);
                 }
             }
         }
